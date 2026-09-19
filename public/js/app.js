@@ -6,18 +6,18 @@
   const SAVE_KEY = "msa_saved_v1";
 
   const NAV = [
-    { path: "/", id: "taxfree", zh: "美国免税州", en: "US Tax-Free" },
-    { path: "/usa-address/", id: "usa", zh: "美国地址", en: "US Address" },
-    { path: "/hk-address/", id: "hk", zh: "香港地址", en: "HK Address" },
-    { path: "/uk-address/", id: "uk", zh: "英国地址", en: "UK Address" },
-    { path: "/de-address/", id: "de", zh: "德国地址", en: "DE Address" },
-    { path: "/sg-address/", id: "sg", zh: "新加坡地址", en: "SG Address" },
-    { path: "/jp-address/", id: "jp", zh: "日本地址", en: "JP Address" },
-    { path: "/ca-address/", id: "ca", zh: "加拿大地址", en: "CA Address" },
-    { path: "/in-address/", id: "in", zh: "印度地址", en: "IN Address" },
-    { path: "/tw-address/", id: "tw", zh: "台湾地址", en: "TW Address" },
-    { path: "/mac-address/", id: "mac", zh: "MAC生成", en: "MAC Gen" },
-    { path: "/mac-address/vendor-lookup/", id: "mac-vendor", zh: "MAC厂商", en: "MAC Vendor" },
+    { path: "/", id: "taxfree", zh: "美国免税州", en: "US Tax-Free", shortZh: "免税州", shortEn: "Tax-Free" },
+    { path: "/usa-address/", id: "usa", zh: "美国地址", en: "US Address", shortZh: "美国", shortEn: "US" },
+    { path: "/hk-address/", id: "hk", zh: "香港地址", en: "HK Address", shortZh: "港", shortEn: "HK" },
+    { path: "/uk-address/", id: "uk", zh: "英国地址", en: "UK Address", shortZh: "英", shortEn: "UK" },
+    { path: "/de-address/", id: "de", zh: "德国地址", en: "DE Address", shortZh: "德", shortEn: "DE" },
+    { path: "/sg-address/", id: "sg", zh: "新加坡地址", en: "SG Address", shortZh: "新", shortEn: "SG" },
+    { path: "/jp-address/", id: "jp", zh: "日本地址", en: "JP Address", shortZh: "日", shortEn: "JP" },
+    { path: "/ca-address/", id: "ca", zh: "加拿大地址", en: "CA Address", shortZh: "加", shortEn: "CA" },
+    { path: "/in-address/", id: "in", zh: "印度地址", en: "IN Address", shortZh: "印", shortEn: "IN" },
+    { path: "/tw-address/", id: "tw", zh: "台湾地址", en: "TW Address", shortZh: "台", shortEn: "TW" },
+    { path: "/mac-address/", id: "mac", zh: "MAC生成", en: "MAC Gen", shortZh: "MAC生成", shortEn: "MAC Gen" },
+    { path: "/mac-address/vendor-lookup/", id: "mac-vendor", zh: "MAC厂商查询", en: "MAC Vendor", shortZh: "MAC查询", shortEn: "MAC Lookup" },
   ];
 
   const I18N = {
@@ -56,6 +56,8 @@
       home: "首页",
       footerTools: "工具导航",
       footerLegal: "说明与条款",
+      toolsMenu: "地址工具",
+      currentPrefix: "当前：",
       format: "输出格式",
       vendor: "厂商 OUI（可选）",
       vendorAny: "随机 / 任意",
@@ -107,6 +109,8 @@
       home: "Home",
       footerTools: "Tools",
       footerLegal: "Legal",
+      toolsMenu: "Address Tools",
+      currentPrefix: "Now: ",
       format: "Format",
       vendor: "Vendor OUI (optional)",
       vendorAny: "Random / any",
@@ -588,12 +592,22 @@
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
     const btn = document.getElementById("btnLang");
     if (btn) btn.textContent = t("lang");
-    // nav labels
+    // nav labels (short names inside dropdown)
     document.querySelectorAll("[data-nav-id]").forEach((a) => {
       const id = a.getAttribute("data-nav-id");
       const item = NAV.find((n) => n.id === id);
-      if (item) a.textContent = lang === "zh" ? item.zh : item.en;
+      if (item) a.textContent = lang === "zh" ? item.shortZh : item.shortEn;
     });
+    const cur = document.getElementById("navCurrentLabel");
+    if (cur) {
+      const id = cur.getAttribute("data-nav-current");
+      const item = NAV.find((n) => n.id === id);
+      if (item) cur.textContent = lang === "zh" ? item.shortZh : item.shortEn;
+      const wrap = cur.parentElement;
+      if (wrap && wrap.classList.contains("nav-current")) {
+        wrap.childNodes[0].textContent = t("currentPrefix");
+      }
+    }
     // SEO titles from data attributes when switching lang
     const titleZh = document.body.getAttribute("data-title-zh");
     const titleEn = document.body.getAttribute("data-title-en");
@@ -602,6 +616,27 @@
     if (h1) h1.textContent = lang === "zh" ? h1.getAttribute("data-h1-zh") : h1.getAttribute("data-h1-en");
     const lead = document.querySelector("[data-lead-zh]");
     if (lead) lead.textContent = lang === "zh" ? lead.getAttribute("data-lead-zh") : lead.getAttribute("data-lead-en");
+  }
+
+  function setupToolsDropdown() {
+    const dd = document.getElementById("navToolsDd");
+    const btn = document.getElementById("btnToolsMenu");
+    const menu = document.getElementById("toolsMenu");
+    if (!dd || !btn || !menu) return;
+    const setOpen = (open) => {
+      dd.classList.toggle("open", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setOpen(!dd.classList.contains("open"));
+    });
+    document.addEventListener("click", (e) => {
+      if (!dd.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
   }
 
   function fillRegionSelect() {
@@ -637,6 +672,7 @@
 
   function init() {
     applyI18nChrome();
+    setupToolsDropdown();
     fillRegionSelect();
     fillMacVendors();
 

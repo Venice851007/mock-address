@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070b14" />
   <title>MAC地址厂商查询｜OUI 识别与格式转换｜MiniSpaceX</title>
   <meta name="description" content="输入 MAC 或 OUI，本地查询常见厂商样例表，并输出冒号/连字符/点分格式与 IPv6 Link-Local。" />
   <meta name="robots" content="index,follow" />
@@ -14,27 +15,35 @@
   <meta name="twitter:card" content="summary" />
   <link rel="alternate" hreflang="zh-CN" href="https://address.minispacex.com/mac-address/vendor-lookup/" />
   <link rel="alternate" hreflang="en" href="https://address.minispacex.com/mac-address/vendor-lookup/" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='white'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' font-weight='700' fill='%23041018'%3EA%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body data-page="mac-vendor" data-title-zh="MAC地址厂商查询｜OUI 识别与格式转换｜MiniSpaceX" data-title-en="MAC Vendor Lookup | OUI Identify &amp; Format | MiniSpaceX">
   <header class="site-header">
     <div class="site-header-inner">
       <a class="brand-link" href="/"><span class="logo">A</span><span>MiniSpaceX Address</span></a>
-      <nav class="nav-scroll" aria-label="Tools">
-          <a href="/" data-nav-id="taxfree" class="">美国免税州</a>
-          <a href="/usa-address/" data-nav-id="usa" class="">美国地址</a>
-          <a href="/hk-address/" data-nav-id="hk" class="">香港地址</a>
-          <a href="/uk-address/" data-nav-id="uk" class="">英国地址</a>
-          <a href="/de-address/" data-nav-id="de" class="">德国地址</a>
-          <a href="/sg-address/" data-nav-id="sg" class="">新加坡地址</a>
-          <a href="/jp-address/" data-nav-id="jp" class="">日本地址</a>
-          <a href="/ca-address/" data-nav-id="ca" class="">加拿大地址</a>
-          <a href="/in-address/" data-nav-id="in" class="">印度地址</a>
-          <a href="/tw-address/" data-nav-id="tw" class="">台湾地址</a>
-          <a href="/mac-address/" data-nav-id="mac" class="">MAC生成</a>
-          <a href="/mac-address/vendor-lookup/" data-nav-id="mac-vendor" class="active">MAC厂商查询</a>
-      </nav>
+      <div class="nav-tools">
+        <div class="nav-dd" id="navToolsDd">
+          <button type="button" class="nav-dd-btn" id="btnToolsMenu" aria-expanded="false" aria-haspopup="true" aria-controls="toolsMenu">
+            <span data-i18n="toolsMenu">地址工具</span> <span class="caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="nav-dd-menu" id="toolsMenu" role="menu">
+            <a href="/" data-nav-id="taxfree" data-short-zh="免税州" data-short-en="Tax-Free" data-full-zh="美国免税州" data-full-en="US Tax-Free" class="" role="menuitem">免税州</a>
+            <a href="/usa-address/" data-nav-id="usa" data-short-zh="美国" data-short-en="US" data-full-zh="美国地址" data-full-en="US Address" class="" role="menuitem">美国</a>
+            <a href="/hk-address/" data-nav-id="hk" data-short-zh="港" data-short-en="HK" data-full-zh="香港地址" data-full-en="HK Address" class="" role="menuitem">港</a>
+            <a href="/uk-address/" data-nav-id="uk" data-short-zh="英" data-short-en="UK" data-full-zh="英国地址" data-full-en="UK Address" class="" role="menuitem">英</a>
+            <a href="/de-address/" data-nav-id="de" data-short-zh="德" data-short-en="DE" data-full-zh="德国地址" data-full-en="DE Address" class="" role="menuitem">德</a>
+            <a href="/sg-address/" data-nav-id="sg" data-short-zh="新" data-short-en="SG" data-full-zh="新加坡地址" data-full-en="SG Address" class="" role="menuitem">新</a>
+            <a href="/jp-address/" data-nav-id="jp" data-short-zh="日" data-short-en="JP" data-full-zh="日本地址" data-full-en="JP Address" class="" role="menuitem">日</a>
+            <a href="/ca-address/" data-nav-id="ca" data-short-zh="加" data-short-en="CA" data-full-zh="加拿大地址" data-full-en="CA Address" class="" role="menuitem">加</a>
+            <a href="/in-address/" data-nav-id="in" data-short-zh="印" data-short-en="IN" data-full-zh="印度地址" data-full-en="IN Address" class="" role="menuitem">印</a>
+            <a href="/tw-address/" data-nav-id="tw" data-short-zh="台" data-short-en="TW" data-full-zh="台湾地址" data-full-en="TW Address" class="" role="menuitem">台</a>
+            <a href="/mac-address/" data-nav-id="mac" data-short-zh="MAC生成" data-short-en="MAC Gen" data-full-zh="MAC生成" data-full-en="MAC Gen" class="" role="menuitem">MAC生成</a>
+            <a href="/mac-address/vendor-lookup/" data-nav-id="mac-vendor" data-short-zh="MAC查询" data-short-en="MAC Lookup" data-full-zh="MAC厂商查询" data-full-en="MAC Vendor" class="active" role="menuitem">MAC查询</a>
+          </div>
+        </div>
+        <span class="nav-current" data-i18n-keep>当前：<strong id="navCurrentLabel" data-nav-current="mac-vendor">MAC查询</strong></span>
+      </div>
       <div class="header-actions">
         <button type="button" id="btnLang" class="btn ghost sm">EN</button>
       </div>
@@ -137,9 +146,20 @@
       <div class="footer-grid"><a href="/help/">使用帮助</a>
           <a href="/about/">关于</a>
           <a href="/privacy/">隐私</a>
-          <a href="/terms/">条款</a>
-        <a href="https://www.5201616.xyz" rel="noopener" target="_blank">MiniSpaceX Hub</a>
-      </div>
+          <a href="/terms/">条款</a></div>
+      <nav class="site-hub theme-dark" aria-label="小磊哥の站点">
+        <div class="site-hub__title">小磊哥の站点 · More</div>
+        <ul class="site-hub__list">
+          <li><a href="https://www.5201616.xyz" target="_blank" rel="noopener">博客</a></li>
+          <li><a href="https://go.5201616.xyz" target="_blank" rel="noopener">工具箱</a></li>
+          <li><a href="https://mail.5201616.xyz" target="_blank" rel="noopener">临时邮箱</a></li>
+          <li><a href="https://otp.5201616.xyz" target="_blank" rel="noopener">OTP</a></li>
+          <li><a href="https://tarot.5201616.xyz" target="_blank" rel="noopener">打工人塔罗</a></li>
+          <li><a href="https://air.5201616.xyz" target="_blank" rel="noopener">苍穹打击者</a></li>
+          <li><a href="https://brick.5201616.xyz" target="_blank" rel="noopener">方块轮回</a></li>
+          <li><span class="is-current" aria-current="page">美区地址 · 当前</span></li>
+        </ul>
+      </nav>
       <div class="footer-meta">
         <p>MiniSpaceX Address · address.minispacex.com · 测试 / 表单校验样例数据专用</p>
         <p>与第三方 mock 地址品牌无关联。数据在浏览器本地生成，不上传服务器。</p>

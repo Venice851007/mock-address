@@ -10,18 +10,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pub = path.join(__dirname, "../public");
 
 const NAV = [
-  { path: "/", id: "taxfree", zh: "美国免税州", en: "US Tax-Free" },
-  { path: "/usa-address/", id: "usa", zh: "美国地址", en: "US Address" },
-  { path: "/hk-address/", id: "hk", zh: "香港地址", en: "HK Address" },
-  { path: "/uk-address/", id: "uk", zh: "英国地址", en: "UK Address" },
-  { path: "/de-address/", id: "de", zh: "德国地址", en: "DE Address" },
-  { path: "/sg-address/", id: "sg", zh: "新加坡地址", en: "SG Address" },
-  { path: "/jp-address/", id: "jp", zh: "日本地址", en: "JP Address" },
-  { path: "/ca-address/", id: "ca", zh: "加拿大地址", en: "CA Address" },
-  { path: "/in-address/", id: "in", zh: "印度地址", en: "IN Address" },
-  { path: "/tw-address/", id: "tw", zh: "台湾地址", en: "TW Address" },
-  { path: "/mac-address/", id: "mac", zh: "MAC生成", en: "MAC Gen" },
-  { path: "/mac-address/vendor-lookup/", id: "mac-vendor", zh: "MAC厂商查询", en: "MAC Vendor" },
+  { path: "/", id: "taxfree", zh: "美国免税州", en: "US Tax-Free", shortZh: "免税州", shortEn: "Tax-Free" },
+  { path: "/usa-address/", id: "usa", zh: "美国地址", en: "US Address", shortZh: "美国", shortEn: "US" },
+  { path: "/hk-address/", id: "hk", zh: "香港地址", en: "HK Address", shortZh: "港", shortEn: "HK" },
+  { path: "/uk-address/", id: "uk", zh: "英国地址", en: "UK Address", shortZh: "英", shortEn: "UK" },
+  { path: "/de-address/", id: "de", zh: "德国地址", en: "DE Address", shortZh: "德", shortEn: "DE" },
+  { path: "/sg-address/", id: "sg", zh: "新加坡地址", en: "SG Address", shortZh: "新", shortEn: "SG" },
+  { path: "/jp-address/", id: "jp", zh: "日本地址", en: "JP Address", shortZh: "日", shortEn: "JP" },
+  { path: "/ca-address/", id: "ca", zh: "加拿大地址", en: "CA Address", shortZh: "加", shortEn: "CA" },
+  { path: "/in-address/", id: "in", zh: "印度地址", en: "IN Address", shortZh: "印", shortEn: "IN" },
+  { path: "/tw-address/", id: "tw", zh: "台湾地址", en: "TW Address", shortZh: "台", shortEn: "TW" },
+  { path: "/mac-address/", id: "mac", zh: "MAC生成", en: "MAC Gen", shortZh: "MAC生成", shortEn: "MAC Gen" },
+  { path: "/mac-address/vendor-lookup/", id: "mac-vendor", zh: "MAC厂商查询", en: "MAC Vendor", shortZh: "MAC查询", shortEn: "MAC Lookup" },
 ];
 
 const LEGAL = [
@@ -39,9 +39,11 @@ function dataScripts(keys) {
 
 function shell({ page, path: pagePath, titleZh, titleEn, descZh, descEn, h1Zh, h1En, leadZh, leadEn, crumbs, dataKeys, controlsHtml, faqHtml, extraMain = "", isStub = false }) {
   const canonical = `https://address.minispacex.com${pagePath === "/" ? "/" : pagePath}`;
+  const currentNav = NAV.find((n) => n.id === page);
+  const currentShort = currentNav ? currentNav.shortZh : "";
   const navHtml = NAV.map((n) =>
-    `<a href="${n.path}" data-nav-id="${n.id}" class="${n.id === page ? "active" : ""}">${n.zh}</a>`
-  ).join("\n          ");
+    `<a href="${n.path}" data-nav-id="${n.id}" data-short-zh="${escAttr(n.shortZh)}" data-short-en="${escAttr(n.shortEn)}" data-full-zh="${escAttr(n.zh)}" data-full-en="${escAttr(n.en)}" class="${n.id === page ? "active" : ""}" role="menuitem">${n.shortZh}</a>`
+  ).join("\n            ");
   const footerTools = NAV.map((n) => `<a href="${n.path}">${n.zh}</a>`).join("\n          ");
   const footerLegal = LEGAL.map((n) => `<a href="${n.path}">${n.zh}</a>`).join("\n          ");
   const crumb = crumbs.map((c, i) =>
@@ -49,12 +51,26 @@ function shell({ page, path: pagePath, titleZh, titleEn, descZh, descEn, h1Zh, h
       ? `<a href="${c.href}">${c.zh}</a><span>/</span>`
       : `<span aria-current="page">${c.zh}</span>`
   ).join("");
+  const hubHtml = `<nav class="site-hub theme-dark" aria-label="小磊哥の站点">
+        <div class="site-hub__title">小磊哥の站点 · More</div>
+        <ul class="site-hub__list">
+          <li><a href="https://www.5201616.xyz" target="_blank" rel="noopener">博客</a></li>
+          <li><a href="https://go.5201616.xyz" target="_blank" rel="noopener">工具箱</a></li>
+          <li><a href="https://mail.5201616.xyz" target="_blank" rel="noopener">临时邮箱</a></li>
+          <li><a href="https://otp.5201616.xyz" target="_blank" rel="noopener">OTP</a></li>
+          <li><a href="https://tarot.5201616.xyz" target="_blank" rel="noopener">打工人塔罗</a></li>
+          <li><a href="https://air.5201616.xyz" target="_blank" rel="noopener">苍穹打击者</a></li>
+          <li><a href="https://brick.5201616.xyz" target="_blank" rel="noopener">方块轮回</a></li>
+          <li><span class="is-current" aria-current="page">美区地址 · 当前</span></li>
+        </ul>
+      </nav>`;
 
   return `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070b14" />
   <title>${titleZh}</title>
   <meta name="description" content="${descZh}" />
   <meta name="robots" content="index,follow" />
@@ -66,16 +82,24 @@ function shell({ page, path: pagePath, titleZh, titleEn, descZh, descEn, h1Zh, h
   <meta name="twitter:card" content="summary" />
   <link rel="alternate" hreflang="zh-CN" href="${canonical}" />
   <link rel="alternate" hreflang="en" href="${canonical}" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='white'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' font-weight='700' fill='%23041018'%3EA%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body data-page="${page}" data-title-zh="${escAttr(titleZh)}" data-title-en="${escAttr(titleEn)}">
   <header class="site-header">
     <div class="site-header-inner">
       <a class="brand-link" href="/"><span class="logo">A</span><span>MiniSpaceX Address</span></a>
-      <nav class="nav-scroll" aria-label="Tools">
-          ${navHtml}
-      </nav>
+      <div class="nav-tools">
+        <div class="nav-dd" id="navToolsDd">
+          <button type="button" class="nav-dd-btn" id="btnToolsMenu" aria-expanded="false" aria-haspopup="true" aria-controls="toolsMenu">
+            <span data-i18n="toolsMenu">地址工具</span> <span class="caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="nav-dd-menu" id="toolsMenu" role="menu">
+            ${navHtml}
+          </div>
+        </div>
+        ${currentNav ? `<span class="nav-current" data-i18n-keep>当前：<strong id="navCurrentLabel" data-nav-current="${currentNav.id}">${currentShort}</strong></span>` : ""}
+      </div>
       <div class="header-actions">
         <button type="button" id="btnLang" class="btn ghost sm">EN</button>
       </div>
@@ -127,9 +151,8 @@ function shell({ page, path: pagePath, titleZh, titleEn, descZh, descEn, h1Zh, h
       <p class="footer-title" data-i18n="footerTools">工具导航</p>
       <div class="footer-grid">${footerTools}</div>
       <p class="footer-title" data-i18n="footerLegal">说明与条款</p>
-      <div class="footer-grid">${footerLegal}
-        <a href="https://www.5201616.xyz" rel="noopener" target="_blank">MiniSpaceX Hub</a>
-      </div>
+      <div class="footer-grid">${footerLegal}</div>
+      ${hubHtml}
       <div class="footer-meta">
         <p>MiniSpaceX Address · address.minispacex.com · 测试 / 表单校验样例数据专用</p>
         <p>与第三方 mock 地址品牌无关联。数据在浏览器本地生成，不上传服务器。</p>
@@ -601,7 +624,7 @@ stubPage({
   titleEn: "Help | MiniSpaceX Address",
   h1Zh: "使用帮助",
   h1En: "Help",
-  bodyZh: `<p>选择顶部导航中的地区或 MAC 工具 → 设置数量与选项 → 点击生成 → 复制字段或导出 JSON/CSV。</p>
+  bodyZh: `<p>打开顶部「地址工具」下拉，选择地区或 MAC 工具 → 设置数量与选项 → 点击生成 → 复制字段或导出 JSON/CSV。</p>
   <p>「保存本页结果」写入浏览器 localStorage，仅保存在你的设备。</p>
   <h2>建议用途</h2>
   <ul><li>表单校验与 UI 演示</li><li>自动化测试夹具</li><li>网络实验室 MAC 配置演练</li></ul>
