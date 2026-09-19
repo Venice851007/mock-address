@@ -1,14 +1,15 @@
 {
   "name": "mock-address",
   "version": "2.0.0",
-  "description": "MiniSpaceX Address — multi-region mock address & MAC sample generators for form testing",
+  "description": "MiniSpaceX Address \u2014 multi-region mock address & MAC sample generators (US geo from Census TIGER samples)",
   "private": true,
   "scripts": {
     "data": "node scripts/generate-data.mjs",
     "pages": "node scripts/build-pages.mjs",
     "build": "npm run data && npm run pages",
     "dev": "WRANGLER_CACHE_DIR=/tmp/wrangler-cache wrangler dev",
-    "deploy": "WRANGLER_CACHE_DIR=/tmp/wrangler-cache wrangler deploy"
+    "deploy": "WRANGLER_CACHE_DIR=/tmp/wrangler-cache wrangler deploy",
+    "data:us": "python3 scripts/build-us-tiger.py"
   },
   "devDependencies": {
     "wrangler": "^4.135.0"

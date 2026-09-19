@@ -51,7 +51,7 @@
       copyField: "复制",
       copied: "已复制",
       empty: "点击「生成」开始（样例测试数据）",
-      sampleNote: "数据集为客户端精选样例，标签为测试用途，非官方邮政全库导出。",
+      sampleNote: "地理样例来自公开来源（美国 Census TIGER/Line 街道+ZIP 范围等）精选提取；门牌号在合理范围内随机。标签：测试样例 / 非真实身份。非官方邮政全库，无政府背书。",
       lang: "EN",
       home: "首页",
       footerTools: "工具导航",
@@ -104,7 +104,7 @@
       copyField: "Copy",
       copied: "Copied",
       empty: "Click Generate to start (sample test data)",
-      sampleNote: "Curated client-side samples for testing — not an official postal dump.",
+      sampleNote: "Geographic samples curated from open data (e.g. US Census TIGER/Line street+ZIP ranges). House numbers randomized in-range. Labeled sample/test — not real identity. Not an official postal dump; no government endorsement.",
       lang: "中文",
       home: "Home",
       footerTools: "Tools",
@@ -180,15 +180,38 @@
   }
 
   /* ---------- Generators ---------- */
+  function pickUsStreet(st) {
+    // Prefer TIGER street samples: [streetName, city, zip, lo, hi]
+    if (st.streets && st.streets.length) {
+      const row = pick(st.streets);
+      const [streetName, city, zip, lo, hi] = row;
+      let a = Number(lo) || 100, b = Number(hi) || 9999;
+      if (b < a) { const t = a; a = b; b = t; }
+      // Randomize house # within plausible Census address-range bounds
+      let hn = randInt(a, b);
+      // Prefer same parity as range start when range is wide (typical US street parity)
+      if (b - a >= 2 && (hn % 2 !== a % 2)) hn = Math.min(b, hn + 1);
+      return { street: `${hn} ${streetName}`, city, zip };
+    }
+    // Legacy curated objects: {street, city, zip} (street already numbered)
+    if (st.addresses && st.addresses.length) return pick(st.addresses);
+    return null;
+  }
+
   function genUS(taxFreeOnly, statePref, opts) {
     const pack = taxFreeOnly ? D("us-taxfree") : D("us");
     if (!pack) return { error: "data missing" };
     const codes = taxFreeOnly
-      ? pack.taxFreeCodes
-      : Object.keys(pack.states);
+      ? (pack.taxFreeCodes || Object.keys(pack.states))
+      : Object.keys(pack.states).filter((c) => {
+          const s = pack.states[c];
+          return (s.streets && s.streets.length) || (s.addresses && s.addresses.length);
+        });
+    if (!codes.length) return { error: "data missing" };
     const code = statePref && pack.states[statePref] ? statePref : pick(codes);
     const st = pack.states[code];
-    const addr = pick(st.addresses);
+    const addr = pickUsStreet(st);
+    if (!addr) return { error: "data missing" };
     const apt = pick(common().aptUnits);
     const street = apt ? `${addr.street}, ${apt}` : addr.street;
     const c = common();

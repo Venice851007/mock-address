@@ -54,13 +54,13 @@ function shell({ page, path: pagePath, titleZh, titleEn, descZh, descEn, h1Zh, h
   const hubHtml = `<nav class="site-hub theme-dark" aria-label="小磊哥の站点">
         <div class="site-hub__title">小磊哥の站点 · More</div>
         <ul class="site-hub__list">
-          <li><a href="https://www.5201616.xyz" target="_blank" rel="noopener">博客</a></li>
-          <li><a href="https://go.5201616.xyz" target="_blank" rel="noopener">工具箱</a></li>
+          <li><a href="https://www.minispacex.com" target="_blank" rel="noopener">博客</a></li>
+          <li><a href="https://go.minispacex.com" target="_blank" rel="noopener">工具箱</a></li>
           <li><a href="https://mail.5201616.xyz" target="_blank" rel="noopener">临时邮箱</a></li>
-          <li><a href="https://otp.5201616.xyz" target="_blank" rel="noopener">OTP</a></li>
-          <li><a href="https://tarot.5201616.xyz" target="_blank" rel="noopener">打工人塔罗</a></li>
-          <li><a href="https://air.5201616.xyz" target="_blank" rel="noopener">苍穹打击者</a></li>
-          <li><a href="https://brick.5201616.xyz" target="_blank" rel="noopener">方块轮回</a></li>
+          <li><a href="https://otp.minispacex.com" target="_blank" rel="noopener">OTP</a></li>
+          <li><a href="https://tarot.minispacex.com" target="_blank" rel="noopener">打工人塔罗</a></li>
+          <li><a href="https://air.minispacex.com" target="_blank" rel="noopener">苍穹打击者</a></li>
+          <li><a href="https://brick.minispacex.com" target="_blank" rel="noopener">方块轮回</a></li>
           <li><span class="is-current" aria-current="page">美区地址 · 当前</span></li>
         </ul>
       </nav>`;
@@ -120,7 +120,7 @@ function shell({ page, path: pagePath, titleZh, titleEn, descZh, descEn, h1Zh, h
     ${isStub ? extraMain : `
     <section class="panel controls">
       ${controlsHtml}
-      <p class="sample-note" data-i18n="sampleNote">数据集为客户端精选样例，标签为测试用途，非官方邮政全库导出。</p>
+      <p class="sample-note" data-i18n="sampleNote">地理样例来自公开来源（如美国 Census TIGER/Line 街道+ZIP 范围）精选提取；门牌号在合理范围内随机。标签：测试样例 / 非真实身份。非官方邮政全库，无政府背书。</p>
     </section>
 
     <section class="panel">
@@ -260,7 +260,8 @@ pages.push({
     controlsHtml: addrControls(),
     faqHtml: faq("常见问题 · 美国免税州地址", [
       { q: "本页覆盖哪些美国免税州？", a: "本页面向通常不征收州级销售税的五个州样例：阿拉斯加（AK）、特拉华（DE）、蒙大拿（MT）、新罕布什尔（NH）、俄勒冈（OR）。生成结果包含常见表单字段，方便你检查州缩写、ZIP 与电话区号的格式是否匹配。" },
-      { q: "生成的数据是真实可投递地址吗？", a: "否。我们使用客户端精选的街道名、城市与邮编样例进行随机组合，仅用于格式校验、UI 演示与自动化测试。请勿当作真实收件地址，也勿用于任何需要真实身份或居住证明的场景。" },
+      { q: "生成的数据是真实可投递地址吗？", a: "否。街道名/城市/ZIP 来自公开地理样例（如美国 Census TIGER/Line 地址范围），门牌号在范围内随机；姓名与电话等为合成格式。结果标注为测试样例 / 非真实身份，请勿当作真实收件地址或用于需要真实身份/居住证明的场景。本站不声称政府背书。" },
+      { q: "为什么地图上有时能搜到街道？", a: "因为样例使用真实存在的街道名与 ZIP 组合（类似常见 mock 地址工具的思路），便于你验证地图组件/地址自动完成；门牌仍随机，且整条记录仍是测试样例，不是某人的真实身份信息。请勿冒充居住或用于平台违规注册。" },
       { q: "能否用于平台账号注册？", a: "不可以。本工具定位是开发测试与表单校验。使用虚假信息规避平台规则、冒充他人或从事欺诈属于违法或违约行为。需要真实服务时，请使用你本人合法真实的信息。" },
       { q: "美国地址通常包含哪些字段？", a: "常见结构是：姓名 → 门牌号与街道 → 城市 → 两位州缩写 → 五位 ZIP（可选 ZIP+4）→ 电话。本工具按该结构输出，便于对照 USPS 风格字段做前端校验。" },
       { q: "TEST 卡号可以支付吗？", a: "不能。可选卡号仅通过 Luhn 校验外观，并明确标记为 TEST / 不可支付，只适合支付表单的前端格式联调。" },
@@ -288,6 +289,7 @@ pages.push({
     controlsHtml: addrControls(),
     faqHtml: faq("常见问题 · 美国地址", [
       { q: "本页与「免税州」页有什么区别？", a: "免税州页只聚焦 AK/DE/MT/NH/OR；本页提供更广的州列表样例，方便测试跨州下拉框、运费规则或州缩写校验。两者都是测试数据，不是官方地址库。" },
+      { q: "地理样例从哪来？", a: "优先使用公开数据精选提取：美国 Census TIGER/Line ADDRFEAT 的街道名与 ZIP/门牌范围，城市名参考 GeoNames 邮政数据（CC-BY）。门牌号在范围内随机。不是居民名录，无政府背书，禁止用于欺诈或冒充。" },
       { q: "ZIP Code 格式是怎样的？", a: "标准为 5 位数字；部分业务表单还接受 ZIP+4。本工具输出 5 位样例 ZIP，并与所选州的城市样例一并给出，便于检查「州-城市-邮编」联动逻辑。" },
       { q: "电话区号如何处理？", a: "每个州配置了常见区号样例池，生成时随机选取并组成 (NXX) NXX-XXXX 形态，用于北美电话字段校验。" },
       { q: "适合哪些技术场景？", a: "前端表单校验、E2E 填充、后台导入测试、地址组件 UI 演示、文档截图等。明确不支持真实注册、物流投递或身份核验。" },
@@ -642,7 +644,7 @@ stubPage({
   h1En: "About",
   bodyZh: `<p>MiniSpaceX Address（address.minispacex.com）是 MiniSpaceX 生态中的<strong>测试地址 / MAC 样例</strong>工具站，强调轻量、可读与本地生成。</p>
   <p>本站与任何第三方商业 mock-address 品牌<strong>无关联</strong>。文案与样式为原创实现。</p>
-  <p>Hub：<a href="https://www.5201616.xyz" rel="noopener" target="_blank">www.5201616.xyz</a></p>`,
+  <p>Hub：<a href="https://www.minispacex.com" rel="noopener" target="_blank">www.minispacex.com</a></p>`,
 });
 
 stubPage({

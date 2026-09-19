@@ -96,7 +96,10 @@ for (const [code, st] of Object.entries(TAXFREE)) {
     addresses: usAddrs(st.cities, code === "OR" ? 160 : 100),
   };
 }
-write("us-taxfree", { states: taxStates, taxFreeCodes: ["AK","DE","MT","NH","OR"] });
+// US tax-free + nationwide street samples are built from Census TIGER/Line ADDRFEAT
+// via `npm run data:us` (scripts/build-us-tiger.py). Do not overwrite those assets here.
+// write("us-taxfree", { states: taxStates, taxFreeCodes: ["AK","DE","MT","NH","OR"] });
+console.log("skip us-taxfree (use npm run data:us / existing TIGER extract)");
 
 // All US states (sample cities) — tax-free included + major others
 const ALL_US = {
@@ -185,7 +188,8 @@ for (const [code, st] of Object.entries(ALL_US)) {
     addresses: usAddrs(st.cities, n),
   };
 }
-write("us", { states: usStates });
+// write("us", { states: usStates });
+console.log("skip us (use npm run data:us / existing TIGER extract)");
 
 // --- HK ---
 const HK_DISTRICTS = [

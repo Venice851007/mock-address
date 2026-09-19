@@ -88,7 +88,7 @@
         <button type="button" id="btnClear" class="btn ghost" data-i18n="clear">清空结果</button>
         <button type="button" id="btnClearSaved" class="btn ghost" data-i18n="clearSaved">清空已保存</button>
       </div>
-      <p class="sample-note" data-i18n="sampleNote">数据集为客户端精选样例，标签为测试用途，非官方邮政全库导出。</p>
+      <p class="sample-note" data-i18n="sampleNote">地理样例来自公开来源（如美国 Census TIGER/Line 街道+ZIP 范围）精选提取；门牌号在合理范围内随机。标签：测试样例 / 非真实身份。非官方邮政全库，无政府背书。</p>
     </section>
 
     <section class="panel">
@@ -110,7 +110,11 @@
       </details>
       <details>
         <summary>生成的数据是真实可投递地址吗？</summary>
-        <p>否。我们使用客户端精选的街道名、城市与邮编样例进行随机组合，仅用于格式校验、UI 演示与自动化测试。请勿当作真实收件地址，也勿用于任何需要真实身份或居住证明的场景。</p>
+        <p>否。街道名/城市/ZIP 来自公开地理样例（如美国 Census TIGER/Line 地址范围），门牌号在范围内随机；姓名与电话等为合成格式。结果标注为测试样例 / 非真实身份，请勿当作真实收件地址或用于需要真实身份/居住证明的场景。本站不声称政府背书。</p>
+      </details>
+      <details>
+        <summary>为什么地图上有时能搜到街道？</summary>
+        <p>因为样例使用真实存在的街道名与 ZIP 组合（类似常见 mock 地址工具的思路），便于你验证地图组件/地址自动完成；门牌仍随机，且整条记录仍是测试样例，不是某人的真实身份信息。请勿冒充居住或用于平台违规注册。</p>
       </details>
       <details>
         <summary>能否用于平台账号注册？</summary>
@@ -175,13 +179,13 @@
       <nav class="site-hub theme-dark" aria-label="小磊哥の站点">
         <div class="site-hub__title">小磊哥の站点 · More</div>
         <ul class="site-hub__list">
-          <li><a href="https://www.5201616.xyz" target="_blank" rel="noopener">博客</a></li>
-          <li><a href="https://go.5201616.xyz" target="_blank" rel="noopener">工具箱</a></li>
+          <li><a href="https://www.minispacex.com" target="_blank" rel="noopener">博客</a></li>
+          <li><a href="https://go.minispacex.com" target="_blank" rel="noopener">工具箱</a></li>
           <li><a href="https://mail.5201616.xyz" target="_blank" rel="noopener">临时邮箱</a></li>
-          <li><a href="https://otp.5201616.xyz" target="_blank" rel="noopener">OTP</a></li>
-          <li><a href="https://tarot.5201616.xyz" target="_blank" rel="noopener">打工人塔罗</a></li>
-          <li><a href="https://air.5201616.xyz" target="_blank" rel="noopener">苍穹打击者</a></li>
-          <li><a href="https://brick.5201616.xyz" target="_blank" rel="noopener">方块轮回</a></li>
+          <li><a href="https://otp.minispacex.com" target="_blank" rel="noopener">OTP</a></li>
+          <li><a href="https://tarot.minispacex.com" target="_blank" rel="noopener">打工人塔罗</a></li>
+          <li><a href="https://air.minispacex.com" target="_blank" rel="noopener">苍穹打击者</a></li>
+          <li><a href="https://brick.minispacex.com" target="_blank" rel="noopener">方块轮回</a></li>
           <li><span class="is-current" aria-current="page">美区地址 · 当前</span></li>
         </ul>
       </nav>
