@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MAC地址厂商查询｜OUI 识别与格式转换｜MiniSpaceX</title>
+  <meta name="description" content="输入 MAC 或 OUI，本地查询常见厂商样例表，并输出冒号/连字符/点分格式与 IPv6 Link-Local。" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://address.minispacex.com/mac-address/vendor-lookup/" />
+  <meta property="og:title" content="MAC地址厂商查询｜OUI 识别与格式转换｜MiniSpaceX" />
+  <meta property="og:description" content="输入 MAC 或 OUI，本地查询常见厂商样例表，并输出冒号/连字符/点分格式与 IPv6 Link-Local。" />
+  <meta property="og:url" content="https://address.minispacex.com/mac-address/vendor-lookup/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="alternate" hreflang="zh-CN" href="https://address.minispacex.com/mac-address/vendor-lookup/" />
+  <link rel="alternate" hreflang="en" href="https://address.minispacex.com/mac-address/vendor-lookup/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='white'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body data-page="mac-vendor" data-title-zh="MAC地址厂商查询｜OUI 识别与格式转换｜MiniSpaceX" data-title-en="MAC Vendor Lookup | OUI Identify &amp; Format | MiniSpaceX">
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand-link" href="/"><span class="logo">A</span><span>MiniSpaceX Address</span></a>
+      <nav class="nav-scroll" aria-label="Tools">
+          <a href="/" data-nav-id="taxfree" class="">美国免税州</a>
+          <a href="/usa-address/" data-nav-id="usa" class="">美国地址</a>
+          <a href="/hk-address/" data-nav-id="hk" class="">香港地址</a>
+          <a href="/uk-address/" data-nav-id="uk" class="">英国地址</a>
+          <a href="/de-address/" data-nav-id="de" class="">德国地址</a>
+          <a href="/sg-address/" data-nav-id="sg" class="">新加坡地址</a>
+          <a href="/jp-address/" data-nav-id="jp" class="">日本地址</a>
+          <a href="/ca-address/" data-nav-id="ca" class="">加拿大地址</a>
+          <a href="/in-address/" data-nav-id="in" class="">印度地址</a>
+          <a href="/tw-address/" data-nav-id="tw" class="">台湾地址</a>
+          <a href="/mac-address/" data-nav-id="mac" class="">MAC生成</a>
+          <a href="/mac-address/vendor-lookup/" data-nav-id="mac-vendor" class="active">MAC厂商查询</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" id="btnLang" class="btn ghost sm">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">首页</a><span>/</span><a href="/mac-address/">MAC生成</a><span>/</span><span aria-current="page">厂商查询</span></nav>
+    <header class="page-hero">
+      <h1 data-h1-zh="MAC 地址厂商查询" data-h1-en="MAC Address Vendor Lookup">MAC 地址厂商查询</h1>
+      <p class="lead" data-lead-zh="粘贴任意常见分隔符的 MAC/OUI，在浏览器内归一化并匹配精选 OUI 样例表。未命中不代表无效，仅表示不在本站样例库。" data-lead-en="Paste a MAC/OUI in any common notation; we normalize and match our curated OUI sample table. Misses mean not in-sample, not necessarily invalid.">粘贴任意常见分隔符的 MAC/OUI，在浏览器内归一化并匹配精选 OUI 样例表。未命中不代表无效，仅表示不在本站样例库。</p>
+    </header>
+
+    <aside class="panel disclaimer" role="note">
+      <p data-i18n="disclaimer">⚠️ 本站仅提供虚构/样例测试数据，用于开发联调与表单校验。禁止用于欺诈、冒充身份或违反任何平台服务条款。</p>
+    </aside>
+
+    
+    <section class="panel controls">
+      
+      <label style="display:block;margin-bottom:.65rem">
+        <span class="lbl" data-i18n="macInput">MAC 或 OUI</span>
+        <input id="macInput" type="text" placeholder="00:1B:44:11:3A:B7 或 001B44" autocomplete="off" />
+      </label>
+      <div class="actions">
+        <button type="button" id="btnLookup" class="btn primary" data-i18n="lookup">查询厂商</button>
+        <button type="button" id="btnCopyAll" class="btn" data-i18n="copyAll">复制全部</button>
+        <button type="button" id="btnSave" class="btn" data-i18n="save">保存本页结果</button>
+        <button type="button" id="btnClear" class="btn ghost" data-i18n="clear">清空结果</button>
+        <a class="btn" href="/mac-address/">返回 MAC 生成</a>
+      </div>
+      <p class="sample-note" data-i18n="sampleNote">数据集为客户端精选样例，标签为测试用途，非官方邮政全库导出。</p>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title" data-i18n="results">生成结果</h2>
+      <div id="results"></div>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title" data-i18n="saved">已保存的样例（本机浏览器）</h2>
+      <div id="savedBox"></div>
+    </section>
+    
+
+    <section class="panel faq">
+      <h2>常见问题 · MAC 厂商查询</h2>
+      <details open>
+        <summary>支持哪些输入格式？</summary>
+        <p>冒号、连字符、点分或连续十六进制均可；工具会先去除分隔符再取前 6 位作为 OUI。</p>
+      </details>
+      <details>
+        <summary>查不到厂商怎么办？</summary>
+        <p>本站使用精选样例 OUI 表，不是完整 IEEE 全量库。查无只说明未收录，你仍可把归一化结果用于格式测试。</p>
+      </details>
+      <details>
+        <summary>会把 MAC 传到服务器吗？</summary>
+        <p>不会。查询完全在本地完成。</p>
+      </details>
+      <details>
+        <summary>还能做什么？</summary>
+        <p>同一结果会给出多种书写格式与 IPv6 Link-Local，方便文档与配置粘贴。</p>
+      </details>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">相关工具</h2>
+      <div class="footer-grid" style="margin:0">
+        <a href="/">美国免税州</a>
+        <a href="/usa-address/">美国地址</a>
+        <a href="/hk-address/">香港地址</a>
+        <a href="/uk-address/">英国地址</a>
+        <a href="/de-address/">德国地址</a>
+        <a href="/sg-address/">新加坡地址</a>
+        <a href="/jp-address/">日本地址</a>
+        <a href="/ca-address/">加拿大地址</a>
+        <a href="/in-address/">印度地址</a>
+        <a href="/tw-address/">台湾地址</a>
+        <a href="/mac-address/">MAC生成</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-title" data-i18n="footerTools">工具导航</p>
+      <div class="footer-grid"><a href="/">美国免税州</a>
+          <a href="/usa-address/">美国地址</a>
+          <a href="/hk-address/">香港地址</a>
+          <a href="/uk-address/">英国地址</a>
+          <a href="/de-address/">德国地址</a>
+          <a href="/sg-address/">新加坡地址</a>
+          <a href="/jp-address/">日本地址</a>
+          <a href="/ca-address/">加拿大地址</a>
+          <a href="/in-address/">印度地址</a>
+          <a href="/tw-address/">台湾地址</a>
+          <a href="/mac-address/">MAC生成</a>
+          <a href="/mac-address/vendor-lookup/">MAC厂商查询</a></div>
+      <p class="footer-title" data-i18n="footerLegal">说明与条款</p>
+      <div class="footer-grid"><a href="/help/">使用帮助</a>
+          <a href="/about/">关于</a>
+          <a href="/privacy/">隐私</a>
+          <a href="/terms/">条款</a>
+        <a href="https://www.5201616.xyz" rel="noopener" target="_blank">MiniSpaceX Hub</a>
+      </div>
+      <div class="footer-meta">
+        <p>MiniSpaceX Address · address.minispacex.com · 测试 / 表单校验样例数据专用</p>
+        <p>与第三方 mock 地址品牌无关联。数据在浏览器本地生成，不上传服务器。</p>
+      </div>
+    </div>
+  </footer>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/data/common.js"></script>
+  <script src="/data/mac-oui.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
