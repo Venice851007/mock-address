@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>美区测试地址生成器 | 免税州地址测试 | MiniSpaceX</title>
+  <meta name="description" content="美区免税州（AK DE MT NH OR）测试地址生成器。开发测试与表单校验样例数据，客户端本地生成。非真实身份，勿用于欺诈。" />
+  <meta name="keywords" content="免税州地址,测试地址,AK DE MT NH OR,mock address,表单校验,MiniSpaceX" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="美区测试地址生成器 · MiniSpaceX Address" />
+  <meta property="og:description" content="US sales-tax-free state mock addresses for form testing. Client-side only." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230ea5e9'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='white'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <header class="top">
+    <div class="brand">
+      <span class="logo">A</span>
+      <div>
+        <h1 data-i18n="title">美区测试地址生成器</h1>
+        <p class="sub" data-i18n="subtitle">开发测试 / 表单校验样例数据 · MiniSpaceX Address</p>
+      </div>
+    </div>
+    <button type="button" id="btnLang" class="btn ghost">EN</button>
+  </header>
+
+  <main class="wrap">
+    <aside class="panel disclaimer" role="note">
+      <p data-i18n="disclaimer">⚠️ 本工具仅生成虚构测试数据，非真实身份证件。请勿用于欺诈、冒充或违反任何平台服务条款。</p>
+    </aside>
+
+    <section class="panel controls">
+      <div class="grid">
+        <label>
+          <span data-i18n="state">免税州</span>
+          <select id="state">
+            <option value="" data-i18n="allStates">全部免税州（随机）</option>
+            <option value="AK">Alaska (AK)</option>
+            <option value="DE">Delaware (DE)</option>
+            <option value="MT">Montana (MT)</option>
+            <option value="NH">New Hampshire (NH)</option>
+            <option value="OR">Oregon (OR)</option>
+          </select>
+        </label>
+        <label>
+          <span data-i18n="count">生成数量</span>
+          <input id="count" type="number" min="1" max="100" value="1" />
+        </label>
+      </div>
+      <div class="checks">
+        <label class="check"><input type="checkbox" id="optProfile" checked /> <span data-i18n="withProfile">包含虚假档案（生日 / 职业）</span></label>
+        <label class="check"><input type="checkbox" id="optCard" /> <span data-i18n="withCard">包含测试卡号（TEST / Luhn 假卡）</span></label>
+      </div>
+      <div class="actions">
+        <button type="button" id="btnGen" class="btn primary" data-i18n="generate">生成地址</button>
+        <button type="button" id="btnCopyAll" class="btn" data-i18n="copyAll">复制全部</button>
+        <button type="button" id="btnJson" class="btn" data-i18n="exportJson">导出 JSON</button>
+        <button type="button" id="btnCsv" class="btn" data-i18n="exportCsv">导出 CSV</button>
+        <button type="button" id="btnClear" class="btn ghost" data-i18n="clear">清空</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title" data-i18n="results">结果</h2>
+      <div id="results"></div>
+    </section>
+
+    <section class="panel faq">
+      <h2 data-i18n="faqTitle">常见问题</h2>
+      <details open>
+        <summary data-i18n="faq1q">什么是美国免税州？</summary>
+        <p data-i18n="faq1a">阿拉斯加(AK)、特拉华(DE)、蒙大拿(MT)、新罕布什尔(NH)、俄勒冈(OR) 通常不征收州级销售税。本工具仅为这五州提供表单测试样例地址。</p>
+      </details>
+      <details>
+        <summary data-i18n="faq2q">生成的数据可以用于注册真实账号吗？</summary>
+        <p data-i18n="faq2a">不可以。数据完全虚构，仅供开发者做表单校验、联调与 UI 演示。用于欺诈或违反平台 ToS 属于违法行为。</p>
+      </details>
+      <details>
+        <summary data-i18n="faq3q">数据在哪里生成？</summary>
+        <p data-i18n="faq3a">全部在浏览器本地生成，不上传到服务器。适合 Cloudflare 免费套餐部署。</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p><strong data-i18n="footerHub">MiniSpaceX 生态</strong> ·
+      <a href="https://www.5201616.xyz" rel="noopener" target="_blank">www.5201616.xyz</a> ·
+      <a href="https://go.5201616.xyz" rel="noopener" target="_blank">go</a> ·
+      <a href="https://mail.5201616.xyz" rel="noopener" target="_blank">mail</a> ·
+      <a href="https://otp.5201616.xyz" rel="noopener" target="_blank">otp</a> ·
+      <a href="https://tarot.5201616.xyz" rel="noopener" target="_blank">tarot</a> ·
+      <a href="https://air.5201616.xyz" rel="noopener" target="_blank">air</a> ·
+      <a href="https://brick.5201616.xyz" rel="noopener" target="_blank">brick</a>
+    </p>
+    <p class="muted">MiniSpaceX Address · address.minispacex.com · 测试数据专用</p>
+  </footer>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/data.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

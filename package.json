@@ -1,0 +1,14 @@
+{
+  "name": "mock-address",
+  "version": "1.0.0",
+  "description": "美区测试地址生成器 — US tax-free state mock addresses for form testing",
+  "private": true,
+  "scripts": {
+    "dev": "WRANGLER_CACHE_DIR=/tmp/wrangler-cache wrangler dev",
+    "deploy": "WRANGLER_CACHE_DIR=/tmp/wrangler-cache wrangler deploy",
+    "pages:deploy": "WRANGLER_CACHE_DIR=/tmp/wrangler-cache wrangler pages deploy public --project-name=mock-address"
+  },
+  "devDependencies": {
+    "wrangler": "^4.135.0"
+  }
+}

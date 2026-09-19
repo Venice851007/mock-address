@@ -1,0 +1,17 @@
+name = "mock-address"
+compatibility_date = "2025-09-01"
+main = "src/worker.js"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+# Custom domain: configure in CF dashboard or via routes after DNS is ready
+# [[routes]]
+# pattern = "address.minispacex.com/*"
+# zone_name = "minispacex.com"
+
+[[routes]]
+pattern = "address.minispacex.com"
+custom_domain = true
