@@ -40,6 +40,8 @@
       saved: "已保存的样例（本机浏览器）",
       savedEmpty: "暂无保存。生成后点击「保存本页结果」。",
       name: "姓名",
+      lastName: "姓",
+      firstName: "名",
       street: "街道",
       city: "城市",
       stateLabel: "州/省",
@@ -95,6 +97,8 @@
       saved: "Saved samples (this browser)",
       savedEmpty: "Nothing saved yet. Generate, then click Save.",
       name: "Name",
+      lastName: "Last name",
+      firstName: "First name",
       street: "Street",
       city: "City",
       stateLabel: "State/Province",
@@ -220,8 +224,10 @@
     const apt = pick(common().aptUnits);
     const street = apt ? `${addr.street}, ${apt}` : addr.street;
     const c = common();
+    const fn = pick(c.firstNames), ln = pick(c.lastNames);
     return attachOpts({
-      name: `${pick(c.firstNames)} ${pick(c.lastNames)}`,
+      firstName: fn, lastName: ln,
+      name: `${fn} ${ln}`,
       street, city: addr.city, state: code, stateName: st.name,
       zip: addr.zip,
       phone: `(${pick(st.areaCodes)}) ${randInt(200, 999)}-${pad(randInt(0, 9999), 4)}`,
@@ -233,14 +239,14 @@
     const pack = D("hk");
     const a = pick(pack.addresses);
     const useEn = document.getElementById("hkLang") && document.getElementById("hkLang").value === "en";
-    const name = useEn
-      ? `${pick(pack.firstNamesEn)} ${pick(pack.lastNamesEn)}`
-      : `${pick(pack.lastNamesZh)}${pick(pack.firstNamesZh)}`;
+    const fn = useEn ? pick(pack.firstNamesEn) : pick(pack.firstNamesZh);
+    const ln = useEn ? pick(pack.lastNamesEn) : pick(pack.lastNamesZh);
+    const name = useEn ? `${fn} ${ln}` : `${ln}${fn}`;
     const street = useEn
       ? `${a.floorUnitEn}, ${a.streetEn}, ${a.districtEn}, ${a.regionEn}`
       : `${a.region}${a.district}${a.streetZh}${a.floorUnitZh}`;
     return attachOpts({
-      name, street,
+      name, firstName: fn, lastName: ln, street,
       city: useEn ? a.districtEn : a.district,
       state: useEn ? a.regionEn : a.region,
       stateName: useEn ? a.regionEn : a.region,
@@ -253,8 +259,10 @@
   function genUK(opts) {
     const pack = D("uk");
     const a = pick(pack.addresses);
+    const fn = pick(pack.firstNames), ln = pick(pack.lastNames);
     return attachOpts({
-      name: `${pick(pack.firstNames)} ${pick(pack.lastNames)}`,
+      firstName: fn, lastName: ln,
+      name: `${fn} ${ln}`,
       street: a.street, city: a.city, state: a.region, stateName: a.region,
       zip: a.postcode,
       phone: `+44 ${pick(pack.areaCodes)} ${randInt(1000, 9999)} ${pad(randInt(0, 9999), 4)}`,
@@ -265,8 +273,10 @@
   function genDE(opts) {
     const pack = D("de");
     const a = pick(pack.addresses);
+    const fn = pick(pack.firstNames), ln = pick(pack.lastNames);
     return attachOpts({
-      name: `${pick(pack.firstNames)} ${pick(pack.lastNames)}`,
+      firstName: fn, lastName: ln,
+      name: `${fn} ${ln}`,
       street: a.street, city: a.city, state: "", stateName: "Germany",
       zip: a.zip,
       phone: `+49 ${randInt(30, 89)}${randInt(1000000, 9999999)}`,
@@ -277,8 +287,10 @@
   function genSG(opts) {
     const pack = D("sg");
     const a = pick(pack.addresses);
+    const fn = pick(pack.firstNames), ln = pick(pack.lastNames);
     return attachOpts({
-      name: `${pick(pack.firstNames)} ${pick(pack.lastNames)}`,
+      firstName: fn, lastName: ln,
+      name: `${fn} ${ln}`,
       street: a.street, city: a.city, state: a.area, stateName: a.area,
       zip: a.zip,
       phone: `+65 ${randInt(8000, 9999)} ${pad(randInt(0, 9999), 4)}`,
@@ -290,8 +302,10 @@
     const pack = D("jp");
     const a = pick(pack.addresses);
     const useEn = lang === "en";
+    const fn = pick(pack.firstNames), ln = pick(pack.lastNames);
     return attachOpts({
-      name: `${pick(pack.lastNames)} ${pick(pack.firstNames)}`,
+      firstName: fn, lastName: ln,
+      name: `${ln} ${fn}`,
       street: useEn ? `${a.zip} ${a.prefEn} ${a.cityEn} ${a.streetEn}` : `〒${a.zip} ${a.pref}${a.city}${a.streetZh}`,
       city: useEn ? a.cityEn : a.city,
       state: useEn ? a.prefEn : a.pref,
@@ -305,8 +319,10 @@
   function genCA(opts) {
     const pack = D("ca");
     const a = pick(pack.addresses);
+    const fn = pick(pack.firstNames), ln = pick(pack.lastNames);
     return attachOpts({
-      name: `${pick(pack.firstNames)} ${pick(pack.lastNames)}`,
+      firstName: fn, lastName: ln,
+      name: `${fn} ${ln}`,
       street: a.street, city: a.city, state: a.province, stateName: a.provinceName,
       zip: a.postal,
       phone: `+1 (${pick(pack.areaCodes)}) ${randInt(200, 999)}-${pad(randInt(0, 9999), 4)}`,
@@ -317,8 +333,10 @@
   function genIN(opts) {
     const pack = D("in");
     const a = pick(pack.addresses);
+    const fn = pick(pack.firstNames), ln = pick(pack.lastNames);
     return attachOpts({
-      name: `${pick(pack.firstNames)} ${pick(pack.lastNames)}`,
+      firstName: fn, lastName: ln,
+      name: `${fn} ${ln}`,
       street: a.street, city: a.city, state: a.state, stateName: a.state,
       zip: a.pin,
       phone: `+91 ${pick(pack.areaCodes)}${randInt(10000000, 99999999)}`,
@@ -330,8 +348,10 @@
     const pack = D("tw");
     const a = pick(pack.addresses);
     const useEn = lang === "en";
+    const fn = pick(pack.firstNames), ln = pick(pack.lastNames);
     return attachOpts({
-      name: `${pick(pack.lastNames)}${pick(pack.firstNames)}`,
+      firstName: fn, lastName: ln,
+      name: `${ln}${fn}`,
       street: useEn
         ? `${a.streetEn}, ${a.districtEn}, ${a.cityEn} ${a.zip}`
         : `${a.city}${a.district}${a.streetZh}`,
@@ -347,8 +367,10 @@
   function genPH(opts) {
     const pack = D("ph");
     const a = pick(pack.addresses);
+    const fn = pick(pack.firstNames), ln = pick(pack.lastNames);
     return attachOpts({
-      name: `${pick(pack.firstNames)} ${pick(pack.lastNames)}`,
+      firstName: fn, lastName: ln,
+      name: `${fn} ${ln}`,
       street: `${a.street}, Brgy. ${a.barangay}`,
       city: a.city, state: a.province, stateName: a.provinceName,
       zip: a.zip,
@@ -523,15 +545,16 @@
         }
       } else {
         fields = [
-          ["name", t("name"), r.name, 6],
+          ["lastName", t("lastName"), r.lastName || "", 3],
+          ["firstName", t("firstName"), r.firstName || "", 3],
           ["street", t("street"), r.street, 6],
           ["city", t("city"), r.city || "", 2],
           ["state", t("stateLabel"), r.state ? `${r.state}${r.stateName ? " (" + r.stateName + ")" : ""}` : (r.stateName || ""), 2],
           ["zip", t("zip"), r.zip || "", 2],
-          ["phone", t("phone"), r.phone || "", 3],
+          ["phone", t("phone"), r.phone || "", (r.dob || r.occupation) ? 2 : 6],
         ];
-        if (r.dob) fields.push(["dob", t("dob"), r.dob, 3]);
-        if (r.occupation) fields.push(["occupation", t("occupation"), r.occupation, 6]);
+        if (r.dob) fields.push(["dob", t("dob"), r.dob, 2]);
+        if (r.occupation) fields.push(["occupation", t("occupation"), r.occupation, 2]);
         if (r.card) fields.push(["card", t("card"), r.card, 6, `<span class="badge">${t("cardHint")}</span>`]);
       }
       const items = fields.filter((f) => f[2]).map(([key, label, val, span, extra]) => `
