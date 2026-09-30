@@ -1,5 +1,7 @@
 # MiniSpaceX Address
 
+[中文](README.zh-CN.md) | English
+
 [![Live](https://img.shields.io/badge/demo-address.minispacex.com-22d3ee)](https://address.minispacex.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![No API keys](https://img.shields.io/badge/API_keys-none_needed-blue)](https://address.minispacex.com/)
