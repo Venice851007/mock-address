@@ -535,8 +535,8 @@
         if (r.card) fields.push(["card", t("card"), r.card, 6, `<span class="badge">${t("cardHint")}</span>`]);
       }
       const items = fields.filter((f) => f[2]).map(([key, label, val, span, extra]) => `
-        <div class="fitem" style="grid-column: span ${span}" data-copy="${escapeAttr(val)}" title="${t("clickToCopyField")}">
-          <span class="flabel">${label}${extra || ""}</span>
+        <div class="fitem" style="grid-column: span ${span}">
+          <span class="flabel">${label}${extra || ""}<button type="button" class="mini-copy" data-copy="${escapeAttr(val)}">${t("copyField")}</button></span>
           <code>${escapeHtml(val)}</code>
         </div>`).join("");
       const pill = r.mac ? (r.oui || "MAC") : (r.state || r.country || PAGE.toUpperCase());
@@ -544,8 +544,6 @@
         <header class="card-head">
           <span class="pill">${escapeHtml(pill)}</span>
           <span class="muted">#${idx + 1}</span>
-          <span class="copy-hint">${t("clickToCopyField")}</span>
-          <button type="button" class="btn ghost sm" data-copy-block="${idx}">${t("copyField")}</button>
         </header>
         <div class="field-grid">${items}</div>
       </article>`;
