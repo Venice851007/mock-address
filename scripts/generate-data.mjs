@@ -513,7 +513,7 @@ const PH_PLACES = [
       { street: "Ortigas Avenue", zip: "1605", barangay: "San Antonio" },
       { street: "Shaw Boulevard", zip: "1605", barangay: "Oranbo" },
       { street: "Julia Vargas Avenue", zip: "1604", barangay: "Ugong" },
-      { street: "San Miguel Avenue", zip: "1603", barangay: "Kapitolyo" },
+      { street: "San Miguel Avenue", zip: "1605", barangay: "San Antonio" },
     ]},
     { city: "Taguig", spots: [
       { street: "32nd Street", zip: "1634", barangay: "Fort Bonifacio" },
@@ -546,7 +546,7 @@ const PH_PLACES = [
     ]},
     { city: "Parañaque", spots: [
       { street: "Dr. A. Santos Avenue", zip: "1700", barangay: "San Dionisio" },
-      { street: "Quirino Avenue", zip: "1702", barangay: "Don Galo" },
+      { street: "Quirino Avenue", zip: "1702", barangay: "Baclaran" },
       { street: "Ninoy Aquino Avenue", zip: "1701", barangay: "Tambo" },
     ]},
     { city: "Caloocan", spots: [
@@ -555,7 +555,7 @@ const PH_PLACES = [
     ]},
     { city: "San Juan", spots: [
       { street: "Ortigas Avenue", zip: "1502", barangay: "Greenhills" },
-      { street: "P. Guevarra Street", zip: "1503", barangay: "Addition Hills" },
+      { street: "P. Guevarra Street", zip: "1500", barangay: "Addition Hills" },
     ]},
     { city: "Las Piñas", spots: [
       { street: "Alabang-Zapote Road", zip: "1740", barangay: "Almanza" },
@@ -619,7 +619,7 @@ const PH_PLACES = [
   ]},
   { province: "Pampanga", provinceName: "Pampanga", cities: [
     { city: "Angeles City", spots: [
-      { street: "MacArthur Highway", zip: "2009", barangay: "Balibago" },
+      { street: "MacArthur Highway", zip: "2024", barangay: "Balibago" },
       { street: "Fields Avenue", zip: "2009", barangay: "Balibago" },
     ]},
   ]},

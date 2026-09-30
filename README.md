@@ -56,6 +56,7 @@ The `/ph-address/` dataset mixes **real, verifiable PH geography** with **synthe
 - **Real street names** per city (Metro Manila, Cebu, Davao, Iloilo, Bacolod, Baguio, CDO, Zamboanga, GenSan, Angeles, Lipa) — findable on maps
 - **Barangay + 4-digit ZIP matched to the city** (e.g. Ayala Ave → Makati 1226, Osmeña Blvd → Cebu City 6000)
 - **House numbers, names, +63 mobile numbers are synthetic test values** — not real residents
+- **Build-time validation:** `node scripts/validate-ph.mjs` cross-checks every record against Nominatim (OSM) + Zippopotam; fixes go back into `scripts/generate-data.mjs`
 
 ## Features
 
