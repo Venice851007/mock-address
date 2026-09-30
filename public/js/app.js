@@ -51,6 +51,7 @@
       cardHint: "假卡 · 仅格式测试 · 不可支付",
       copyField: "复制",
       clickToCopy: "点击卡片复制",
+      clickToCopyField: "点字段复制该项",
       copied: "已复制",
       empty: "点击「生成」开始（样例测试数据）",
       sampleNote: "地理样例来自公开来源（美国 Census TIGER/Line 街道+ZIP 范围等）精选提取；门牌号在合理范围内随机。标签：测试样例 / 非真实身份。非官方邮政全库，无政府背书。",
@@ -105,6 +106,7 @@
       cardHint: "Fake · format test only · not chargeable",
       copyField: "Copy",
       clickToCopy: "Click card to copy",
+      clickToCopyField: "Click a field to copy it",
       copied: "Copied",
       empty: "Click Generate to start (sample test data)",
       sampleNote: "Geographic samples curated from open data (e.g. US Census TIGER/Line street+ZIP ranges). House numbers randomized in-range. Labeled sample/test — not real identity. Not an official postal dump; no government endorsement.",
@@ -505,16 +507,47 @@
       if (r.error) {
         return `<article class="card"><p class="muted">${escapeHtml(r.error)}</p></article>`;
       }
+      // [key, label, value, grid span] — short fields share a row
+      let fields;
+      if (r.mac) {
+        fields = [
+          ["mac", "MAC", r.mac, 6],
+          ["oui", t("oui"), r.oui, 2],
+          ["vendor", t("vendorName"), r.vendor, 4],
+          ["ipv6", t("ipv6"), r.ipv6, 6],
+        ];
+        if (r.macHyphen) {
+          fields.push(["hyphen", "Hyphen", r.macHyphen, 2]);
+          fields.push(["dot", "Dot", r.macDot, 2]);
+          fields.push(["plain", "Plain", r.macPlain, 2]);
+        }
+      } else {
+        fields = [
+          ["name", t("name"), r.name, 6],
+          ["street", t("street"), r.street, 6],
+          ["city", t("city"), r.city || "", 2],
+          ["state", t("stateLabel"), r.state ? `${r.state}${r.stateName ? " (" + r.stateName + ")" : ""}` : (r.stateName || ""), 2],
+          ["zip", t("zip"), r.zip || "", 2],
+          ["phone", t("phone"), r.phone || "", 3],
+        ];
+        if (r.dob) fields.push(["dob", t("dob"), r.dob, 3]);
+        if (r.occupation) fields.push(["occupation", t("occupation"), r.occupation, 6]);
+        if (r.card) fields.push(["card", t("card"), r.card, 6, `<span class="badge">${t("cardHint")}</span>`]);
+      }
+      const items = fields.filter((f) => f[2]).map(([key, label, val, span, extra]) => `
+        <div class="fitem" style="grid-column: span ${span}" data-copy="${escapeAttr(val)}" title="${t("clickToCopyField")}">
+          <span class="flabel">${label}${extra || ""}</span>
+          <code>${escapeHtml(val)}</code>
+        </div>`).join("");
       const pill = r.mac ? (r.oui || "MAC") : (r.state || r.country || PAGE.toUpperCase());
-      const text = formatBlock(r);
       return `<article class="card compact" data-idx="${idx}">
         <header class="card-head">
           <span class="pill">${escapeHtml(pill)}</span>
           <span class="muted">#${idx + 1}</span>
-          <span class="copy-hint">${t("clickToCopy")}</span>
+          <span class="copy-hint">${t("clickToCopyField")}</span>
           <button type="button" class="btn ghost sm" data-copy-block="${idx}">${t("copyField")}</button>
         </header>
-        <pre class="block" data-copy-block="${idx}" title="${t("clickToCopy")}">${escapeHtml(text)}</pre>
+        <div class="field-grid">${items}</div>
       </article>`;
     }).join("");
   }
