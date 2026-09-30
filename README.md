@@ -20,6 +20,7 @@ Live: [https://address.minispacex.com](https://address.minispacex.com)
 | `/ca-address/` | Canada |
 | `/in-address/` | India |
 | `/tw-address/` | Taiwan |
+| `/ph-address/` | Philippines (Metro Manila, Cebu, Davao — real street+barangay+ZIP samples) |
 | `/mac-address/` | MAC generator |
 | `/mac-address/vendor-lookup/` | MAC OUI vendor lookup |
 | `/help/` `/about/` `/privacy/` `/terms/` | Stubs |
@@ -47,6 +48,14 @@ npm run data:us
 ```
 
 Other regions: `npm run data` (does **not** overwrite US TIGER assets).
+
+## Philippines geographic samples
+
+The `/ph-address/` dataset mixes **real, verifiable PH geography** with **synthetic identity**:
+
+- **Real street names** per city (Metro Manila, Cebu, Davao, Iloilo, Bacolod, Baguio, CDO, Zamboanga, GenSan, Angeles, Lipa) — findable on maps
+- **Barangay + 4-digit ZIP matched to the city** (e.g. Ayala Ave → Makati 1226, Osmeña Blvd → Cebu City 6000)
+- **House numbers, names, +63 mobile numbers are synthetic test values** — not real residents
 
 ## Features
 

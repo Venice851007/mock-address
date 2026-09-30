@@ -20,6 +20,7 @@ const NAV = [
   { path: "/ca-address/", id: "ca", zh: "加拿大地址", en: "CA Address", shortZh: "加", shortEn: "CA" },
   { path: "/in-address/", id: "in", zh: "印度地址", en: "IN Address", shortZh: "印", shortEn: "IN" },
   { path: "/tw-address/", id: "tw", zh: "台湾地址", en: "TW Address", shortZh: "台", shortEn: "TW" },
+  { path: "/ph-address/", id: "ph", zh: "菲律宾地址", en: "PH Address", shortZh: "菲", shortEn: "PH" },
   { path: "/mac-address/", id: "mac", zh: "MAC生成", en: "MAC Gen", shortZh: "MAC生成", shortEn: "MAC Gen" },
   { path: "/mac-address/vendor-lookup/", id: "mac-vendor", zh: "MAC厂商查询", en: "MAC Vendor", shortZh: "MAC查询", shortEn: "MAC Lookup" },
 ];
@@ -295,7 +296,7 @@ pages.push({
       { q: "电话区号如何处理？", a: "每个州配置了常见区号样例池，生成时随机选取并组成 (NXX) NXX-XXXX 形态，用于北美电话字段校验。" },
       { q: "适合哪些技术场景？", a: "前端表单校验、E2E 填充、后台导入测试、地址组件 UI 演示、文档截图等。明确不支持真实注册、物流投递或身份核验。" },
       { q: "如何切换中英文界面？", a: "点击右上角 EN / 中文。页面标题与导语会同步切换；生成字段标签也会切换。" },
-      { q: "内部链接怎么用？", a: "页脚与「相关工具」矩阵可跳转到香港、英国、德国、新加坡、日本、加拿大、印度、台湾与 MAC 工具，便于站内 SEO 与测试场景切换。" },
+      { q: "内部链接怎么用？", a: "页脚与「相关工具」矩阵可跳转到香港、英国、德国、新加坡、日本、加拿大、印度、台湾、菲律宾与 MAC 工具，便于站内 SEO 与测试场景切换。" },
     ]),
   },
 });
@@ -500,6 +501,33 @@ pages.push({
       { q: "邮递区号？", a: "样例使用常见三码区号形态，用于长度与必填校验。" },
       { q: "地址顺序？", a: "中文习惯由大到小：县市 → 区 → 路街 → 号。生成块按此拼接。" },
       { q: "用途？", a: "开发测试与表单演示，非真实户籍或物流数据。" },
+    ]),
+  },
+});
+
+pages.push({
+  out: "ph-address/index.html",
+  cfg: {
+    page: "ph",
+    path: "/ph-address/",
+    titleZh: "菲律宾地址生成器｜马尼拉 宿务 达沃 4位邮编样例｜MiniSpaceX",
+    titleEn: "Philippines Address Generator | Manila Cebu Davao Samples | MiniSpaceX",
+    descZh: "生成菲律宾样例地址：大马尼拉、宿务、达沃等城市街道、Barangay、4 位邮编与 +63 电话。客户端本地生成，仅供开发测试。",
+    descEn: "Philippine sample addresses: Metro Manila, Cebu, Davao streets, barangay, 4-digit ZIP, +63 phones. Client-side. Testing only.",
+    h1Zh: "菲律宾地址在线生成器",
+    h1En: "Philippines Address Generator",
+    leadZh: "面向菲律宾表单的地址字段样例：街道、Barangay（描笼涯）、城市、省/大马尼拉、4 位邮编与 +63 手机号。街道与邮编采用真实存在的公开样例（地图可查），门牌号随机，整条记录仍标注为测试样例。",
+    leadEn: "Sample PH address fields: street, barangay, city, province/Metro Manila, 4-digit ZIP, +63 mobile. Streets and ZIPs are real public samples (findable on maps); house numbers randomized; whole record labeled as test sample.",
+    crumbs: [{ href: "/", zh: "首页" }, { href: "/ph-address/", zh: "菲律宾地址" }],
+    dataKeys: ["ph"],
+    controlsHtml: simpleControls(),
+    faqHtml: faq("常见问题 · 菲律宾地址", [
+      { q: "菲律宾邮编是几位？", a: "通常为 4 位数字（如马卡蒂 1226、宿务市 6000、达沃市 8000）。本页样例遵循该规则，并与城市一一匹配。" },
+      { q: "Barangay 是什么？", a: "Barangay（描笼涯）是菲律宾最小的行政单位，地址里常出现在街道之后、城市之前。生成结果按「门牌 街道, Brgy. 描笼涯」拼接，便于测试多段地址输入框。" },
+      { q: "覆盖哪些城市？", a: "大马尼拉（马卡蒂、帕赛、帕西格、塔吉格、曼达卢永、奎松、马尼拉、帕拉纳克、卡洛奥坎、圣胡安、拉斯皮尼亚斯）以及宿务、达沃、怡朗、巴科洛德、碧瑶、卡加延德奥罗、三宝颜、将军市、安吉利斯、利帕等城市样例。" },
+      { q: "街道是真实存在的吗？", a: "是。样例采用真实存在的街道名与对应邮编（如 Ayala Avenue 1226、Osmeña Boulevard 6000），思路类似本站美国页用 Census TIGER 真实街道的做法，方便你在地图上验证；门牌号随机，整条记录仍标注为测试样例，不是真实居民信息。" },
+      { q: "电话格式？", a: "样例使用菲律宾手机号形态 +63 9XX XXX XXXX，便于校验国际区号与号码长度。" },
+      { q: "可以当真实收件地址吗？", a: "不可以。仅限开发测试与表单校验，请使用合法真实资料办理正式业务。" },
     ]),
   },
 });

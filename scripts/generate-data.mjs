@@ -488,6 +488,173 @@ write("tw", {
   lastNames: ["陈","林","黄","张","李","王","吴","刘","蔡","杨"],
 });
 
+// --- PH ---
+// Curated real-street samples: street names + 4-digit ZIPs that exist on maps
+// (cross-checked against public PH ZIP directories, e.g. Lamudi/techpilipinas).
+// House numbers randomized at build time; whole record remains a test sample.
+const PH_PLACES = [
+  { province: "NCR", provinceName: "Metro Manila", cities: [
+    { city: "Makati", spots: [
+      { street: "Ayala Avenue", zip: "1226", barangay: "San Lorenzo" },
+      { street: "Paseo de Roxas", zip: "1226", barangay: "San Lorenzo" },
+      { street: "Sen. Gil Puyat Avenue", zip: "1200", barangay: "Palanan" },
+      { street: "Chino Roces Avenue", zip: "1231", barangay: "Pio del Pilar" },
+      { street: "Jupiter Street", zip: "1209", barangay: "Bel-Air" },
+      { street: "Kamagong Street", zip: "1203", barangay: "San Antonio" },
+    ]},
+    { city: "Pasay", spots: [
+      { street: "Roxas Boulevard", zip: "1308", barangay: "Bay City" },
+      { street: "EDSA", zip: "1300", barangay: "Malibay" },
+      { street: "Taft Avenue", zip: "1302", barangay: "San Rafael" },
+      { street: "F.B. Harrison Street", zip: "1304", barangay: "Santa Clara" },
+      { street: "Macapagal Boulevard", zip: "1308", barangay: "Bay City" },
+    ]},
+    { city: "Pasig", spots: [
+      { street: "Ortigas Avenue", zip: "1605", barangay: "San Antonio" },
+      { street: "Shaw Boulevard", zip: "1605", barangay: "Oranbo" },
+      { street: "Julia Vargas Avenue", zip: "1604", barangay: "Ugong" },
+      { street: "San Miguel Avenue", zip: "1603", barangay: "Kapitolyo" },
+    ]},
+    { city: "Taguig", spots: [
+      { street: "32nd Street", zip: "1634", barangay: "Fort Bonifacio" },
+      { street: "5th Avenue", zip: "1634", barangay: "Fort Bonifacio" },
+      { street: "Bonifacio High Street", zip: "1634", barangay: "Fort Bonifacio" },
+      { street: "McKinley Road", zip: "1634", barangay: "Pinagsama" },
+    ]},
+    { city: "Mandaluyong", spots: [
+      { street: "Shaw Boulevard", zip: "1552", barangay: "Highway Hills" },
+      { street: "EDSA", zip: "1550", barangay: "Wack-Wack Greenhills" },
+      { street: "Boni Avenue", zip: "1551", barangay: "Plainview" },
+      { street: "Pioneer Street", zip: "1554", barangay: "Kapitolyo" },
+    ]},
+    { city: "Quezon City", spots: [
+      { street: "Commonwealth Avenue", zip: "1101", barangay: "Diliman" },
+      { street: "Quezon Avenue", zip: "1103", barangay: "South Triangle" },
+      { street: "Timog Avenue", zip: "1103", barangay: "South Triangle" },
+      { street: "Tomas Morato Avenue", zip: "1103", barangay: "Kamuning" },
+      { street: "Aurora Boulevard", zip: "1109", barangay: "Cubao" },
+    ]},
+    { city: "Manila", spots: [
+      { street: "Taft Avenue", zip: "1004", barangay: "Malate" },
+      { street: "Roxas Boulevard", zip: "1000", barangay: "Ermita" },
+      { street: "España Boulevard", zip: "1008", barangay: "Sampaloc" },
+      { street: "Recto Avenue", zip: "1003", barangay: "Santa Cruz" },
+      { street: "Ongpin Street", zip: "1006", barangay: "Binondo" },
+      { street: "Quintin Paredes Street", zip: "1006", barangay: "Binondo" },
+      { street: "M.H. del Pilar Street", zip: "1000", barangay: "Ermita" },
+      { street: "Padre Faura Street", zip: "1000", barangay: "Ermita" },
+    ]},
+    { city: "Parañaque", spots: [
+      { street: "Dr. A. Santos Avenue", zip: "1700", barangay: "San Dionisio" },
+      { street: "Quirino Avenue", zip: "1702", barangay: "Don Galo" },
+      { street: "Ninoy Aquino Avenue", zip: "1701", barangay: "Tambo" },
+    ]},
+    { city: "Caloocan", spots: [
+      { street: "EDSA", zip: "1400", barangay: "Bagong Barrio" },
+      { street: "Rizal Avenue", zip: "1400", barangay: "Grace Park" },
+    ]},
+    { city: "San Juan", spots: [
+      { street: "Ortigas Avenue", zip: "1502", barangay: "Greenhills" },
+      { street: "P. Guevarra Street", zip: "1503", barangay: "Addition Hills" },
+    ]},
+    { city: "Las Piñas", spots: [
+      { street: "Alabang-Zapote Road", zip: "1740", barangay: "Almanza" },
+      { street: "Marcos Alvarez Avenue", zip: "1747", barangay: "Talon" },
+    ]},
+  ]},
+  { province: "Cebu", provinceName: "Cebu", cities: [
+    { city: "Cebu City", spots: [
+      { street: "Osmeña Boulevard", zip: "6000", barangay: "Capitol Site" },
+      { street: "Colon Street", zip: "6000", barangay: "Parian" },
+      { street: "Gorordo Avenue", zip: "6000", barangay: "Lahug" },
+      { street: "F. Ramos Street", zip: "6000", barangay: "Cogon Ramos" },
+    ]},
+  ]},
+  { province: "Davao del Sur", provinceName: "Davao del Sur", cities: [
+    { city: "Davao City", spots: [
+      { street: "San Pedro Street", zip: "8000", barangay: "Poblacion" },
+      { street: "J.P. Laurel Avenue", zip: "8000", barangay: "Bajada" },
+      { street: "Quirino Avenue", zip: "8000", barangay: "Poblacion" },
+      { street: "McArthur Highway", zip: "8000", barangay: "Talomo" },
+    ]},
+  ]},
+  { province: "Iloilo", provinceName: "Iloilo", cities: [
+    { city: "Iloilo City", spots: [
+      { street: "J.M. Basa Street", zip: "5000", barangay: "City Proper" },
+      { street: "Gen. Luna Street", zip: "5000", barangay: "City Proper" },
+      { street: "Delgado Street", zip: "5000", barangay: "Molo" },
+    ]},
+  ]},
+  { province: "Negros Occidental", provinceName: "Negros Occidental", cities: [
+    { city: "Bacolod City", spots: [
+      { street: "Lacson Street", zip: "6100", barangay: "Mandalagan" },
+      { street: "Rizal Street", zip: "6100", barangay: "Villamonte" },
+    ]},
+  ]},
+  { province: "Benguet", provinceName: "Benguet", cities: [
+    { city: "Baguio City", spots: [
+      { street: "Session Road", zip: "2600", barangay: "Session Road Area" },
+      { street: "Magsaysay Avenue", zip: "2600", barangay: "Magsaysay" },
+      { street: "Harrison Road", zip: "2600", barangay: "Burnham" },
+    ]},
+  ]},
+  { province: "Misamis Oriental", provinceName: "Misamis Oriental", cities: [
+    { city: "Cagayan de Oro City", spots: [
+      { street: "Corrales Avenue", zip: "9000", barangay: "Cogon" },
+      { street: "Velez Street", zip: "9000", barangay: "Cogon" },
+      { street: "Tiano Brothers Street", zip: "9000", barangay: "Carmen" },
+    ]},
+  ]},
+  { province: "Zamboanga del Sur", provinceName: "Zamboanga del Sur", cities: [
+    { city: "Zamboanga City", spots: [
+      { street: "Gov. Lim Avenue", zip: "7000", barangay: "Baliwasan" },
+      { street: "Veterans Avenue", zip: "7000", barangay: "Tetuan" },
+    ]},
+  ]},
+  { province: "South Cotabato", provinceName: "South Cotabato", cities: [
+    { city: "General Santos City", spots: [
+      { street: "Pioneer Avenue", zip: "9500", barangay: "Dadiangas" },
+      { street: "Santiago Boulevard", zip: "9500", barangay: "Lagao" },
+    ]},
+  ]},
+  { province: "Pampanga", provinceName: "Pampanga", cities: [
+    { city: "Angeles City", spots: [
+      { street: "MacArthur Highway", zip: "2009", barangay: "Balibago" },
+      { street: "Fields Avenue", zip: "2009", barangay: "Balibago" },
+    ]},
+  ]},
+  { province: "Batangas", provinceName: "Batangas", cities: [
+    { city: "Lipa City", spots: [
+      { street: "Ayala Highway", zip: "4217", barangay: "Sabang" },
+      { street: "C.M. Recto Avenue", zip: "4217", barangay: "Marawoy" },
+    ]},
+  ]},
+];
+const phAddrs = [];
+for (const prov of PH_PLACES) {
+  for (const c of prov.cities) {
+    for (const s of c.spots) {
+      for (let i = 0; i < 2; i++) {
+        const num = 10 + (phAddrs.length * 37 + i * 53) % 480;
+        phAddrs.push({
+          street: `${num} ${s.street}`,
+          barangay: s.barangay,
+          city: c.city,
+          province: prov.province,
+          provinceName: prov.provinceName,
+          zip: s.zip,
+        });
+      }
+    }
+  }
+}
+write("ph", {
+  addresses: phAddrs,
+  firstNames: ["Juan","Jose","Pedro","Miguel","Rafael","Andres","Carlos","Luis","Antonio","Francisco","Ramon","Eduardo","Ricardo","Manuel","Maria","Ana","Rosa","Carmen","Isabel","Sofia","Lucia","Teresa","Elena","Gabriela","Margarita","Cristina","Josefina","Corazon","Angelica","Bianca","Paolo","Katrina","Marco","Emmanuel"],
+  lastNames: ["Santos","Reyes","Cruz","Garcia","Mendoza","Torres","Ramos","Aquino","Navarro","Salazar","Castillo","Flores","Villanueva","Dela Cruz","Del Rosario","Gonzales","Fernandez","Lopez","Pascual","Santiago","Domingo","Marquez","Bautista","Ocampo","Padilla","Velasco","Mercado","Aguilar","Rivera","Moral"],
+  mobilePrefixes: ["905","906","908","909","910","912","915","916","917","918","919","920","921","926","927","928","929","930","935","939","940","945","946","948","949","955","956","961","962","963","965","966","967"],
+});
+
 // --- MAC OUI (common vendors, curated sample) ---
 const OUI = [
   ["000C29","VMware, Inc."],["005056","VMware, Inc."],["001C14","VMware, Inc."],

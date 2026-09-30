@@ -16,6 +16,7 @@
     { path: "/ca-address/", id: "ca", zh: "加拿大地址", en: "CA Address", shortZh: "加", shortEn: "CA" },
     { path: "/in-address/", id: "in", zh: "印度地址", en: "IN Address", shortZh: "印", shortEn: "IN" },
     { path: "/tw-address/", id: "tw", zh: "台湾地址", en: "TW Address", shortZh: "台", shortEn: "TW" },
+    { path: "/ph-address/", id: "ph", zh: "菲律宾地址", en: "PH Address", shortZh: "菲", shortEn: "PH" },
     { path: "/mac-address/", id: "mac", zh: "MAC生成", en: "MAC Gen", shortZh: "MAC生成", shortEn: "MAC Gen" },
     { path: "/mac-address/vendor-lookup/", id: "mac-vendor", zh: "MAC厂商查询", en: "MAC Vendor", shortZh: "MAC查询", shortEn: "MAC Lookup" },
   ];
@@ -339,6 +340,19 @@
     }, opts);
   }
 
+  function genPH(opts) {
+    const pack = D("ph");
+    const a = pick(pack.addresses);
+    return attachOpts({
+      name: `${pick(pack.firstNames)} ${pick(pack.lastNames)}`,
+      street: `${a.street}, Brgy. ${a.barangay}`,
+      city: a.city, state: a.province, stateName: a.provinceName,
+      zip: a.zip,
+      phone: `+63 ${pick(pack.mobilePrefixes)} ${randInt(100, 999)} ${pad(randInt(0, 9999), 4)}`,
+      country: "PH",
+    }, opts);
+  }
+
   /* ---------- MAC ---------- */
   function normalizeMac(s) {
     return String(s || "").replace(/[^0-9A-Fa-f]/g, "").toUpperCase();
@@ -408,6 +422,7 @@
       case "ca": return genCA(opts);
       case "in": return genIN(opts);
       case "tw": return genTW(opts);
+      case "ph": return genPH(opts);
       case "mac": return genMac();
       default: return null;
     }
