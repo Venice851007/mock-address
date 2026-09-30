@@ -194,6 +194,20 @@ select option { background: #0f1624; color: var(--text); }
   border: 1px solid var(--border); border-radius: var(--radius);
   padding: .85rem; background: var(--surface2); margin-bottom: .7rem;
 }
+.card.compact { padding: .7rem .75rem; }
+.copy-hint {
+  margin-left: auto; font-size: .75rem; color: var(--muted);
+}
+.block {
+  margin: 0; padding: .6rem .7rem;
+  background: #0a101c; border: 1px solid var(--border); border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .85rem; line-height: 1.6; color: #dbeafe;
+  white-space: pre-wrap; overflow-wrap: anywhere;
+  cursor: pointer; transition: border-color .15s ease, background .15s ease;
+}
+.block:hover { border-color: var(--accent); background: #0b1224; }
+.block:active { transform: scale(.998); }
 .card-head {
   display: flex; align-items: center; gap: .55rem; margin-bottom: .55rem; flex-wrap: wrap;
 }

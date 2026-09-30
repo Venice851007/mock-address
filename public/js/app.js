@@ -50,6 +50,7 @@
       card: "测试卡号",
       cardHint: "假卡 · 仅格式测试 · 不可支付",
       copyField: "复制",
+      clickToCopy: "点击卡片复制",
       copied: "已复制",
       empty: "点击「生成」开始（样例测试数据）",
       sampleNote: "地理样例来自公开来源（美国 Census TIGER/Line 街道+ZIP 范围等）精选提取；门牌号在合理范围内随机。标签：测试样例 / 非真实身份。非官方邮政全库，无政府背书。",
@@ -103,6 +104,7 @@
       card: "Test card",
       cardHint: "Fake · format test only · not chargeable",
       copyField: "Copy",
+      clickToCopy: "Click card to copy",
       copied: "Copied",
       empty: "Click Generate to start (sample test data)",
       sampleNote: "Geographic samples curated from open data (e.g. US Census TIGER/Line street+ZIP ranges). House numbers randomized in-range. Labeled sample/test — not real identity. Not an official postal dump; no government endorsement.",
@@ -503,48 +505,16 @@
       if (r.error) {
         return `<article class="card"><p class="muted">${escapeHtml(r.error)}</p></article>`;
       }
-      let fields;
-      if (r.mac) {
-        fields = [
-          ["mac", "MAC", r.mac],
-          ["oui", t("oui"), r.oui],
-          ["vendor", t("vendorName"), r.vendor],
-          ["ipv6", t("ipv6"), r.ipv6],
-        ];
-        if (r.macHyphen) {
-          fields.push(["hyphen", "Hyphen", r.macHyphen]);
-          fields.push(["dot", "Dot", r.macDot]);
-          fields.push(["plain", "Plain", r.macPlain]);
-        }
-      } else {
-        fields = [
-          ["name", t("name"), r.name],
-          ["street", t("street"), r.street],
-          ["city", t("city"), r.city || ""],
-          ["state", t("stateLabel"), r.state ? `${r.state}${r.stateName ? " (" + r.stateName + ")" : ""}` : (r.stateName || "")],
-          ["zip", t("zip"), r.zip || ""],
-          ["phone", t("phone"), r.phone || ""],
-        ];
-        if (r.dob) fields.push(["dob", t("dob"), r.dob]);
-        if (r.occupation) fields.push(["occupation", t("occupation"), r.occupation]);
-        if (r.card) fields.push(["card", t("card"), r.card, `<span class="badge">${t("cardHint")}</span>`]);
-      }
-      const rows = fields.filter((f) => f[2]).map(([key, label, val, extra]) => `
-        <div class="field" data-key="${key}">
-          <div class="field-meta"><span class="label">${label}</span>${extra || ""}</div>
-          <div class="field-row">
-            <code class="value">${escapeHtml(val)}</code>
-            <button type="button" class="btn ghost sm" data-copy="${escapeAttr(val)}">${t("copyField")}</button>
-          </div>
-        </div>`).join("");
       const pill = r.mac ? (r.oui || "MAC") : (r.state || r.country || PAGE.toUpperCase());
-      return `<article class="card" data-idx="${idx}">
+      const text = formatBlock(r);
+      return `<article class="card compact" data-idx="${idx}">
         <header class="card-head">
           <span class="pill">${escapeHtml(pill)}</span>
           <span class="muted">#${idx + 1}</span>
-          <button type="button" class="btn ghost sm" data-copy-block="${idx}">${t("copyAll")}</button>
+          <span class="copy-hint">${t("clickToCopy")}</span>
+          <button type="button" class="btn ghost sm" data-copy-block="${idx}">${t("copyField")}</button>
         </header>
-        <div class="fields">${rows}</div>
+        <pre class="block" data-copy-block="${idx}" title="${t("clickToCopy")}">${escapeHtml(text)}</pre>
       </article>`;
     }).join("");
   }
