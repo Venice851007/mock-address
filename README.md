@@ -17,7 +17,7 @@ Multi-region **mock address** + **MAC** sample generators for **development / fo
 
 ## Features
 
-- 12 generators: US tax-free states, all US states, HK, UK, DE, SG, JP, CA, IN, TW, PH + MAC
+- 13 generators: US tax-free states, all US states, HK, UK, DE, SG, JP, CA, IN, TW, PH, TR + MAC
 - Compact result cards — short fields share a row, every field has its own **copy button**
 - 姓 / 名 (last / first name) as separate fields
 - Optional test profile (DOB + occupation) and TEST Luhn-looking card (clearly fake, not chargeable)
@@ -39,6 +39,7 @@ Multi-region **mock address** + **MAC** sample generators for **development / fo
 | `/in-address/` | India |
 | `/tw-address/` | Taiwan |
 | `/ph-address/` | Philippines — real street + barangay + 4-digit ZIP samples |
+| `/tr-address/` | Turkey — real street + district + 5-digit postal code samples |
 | `/mac-address/` | MAC generator |
 | `/mac-address/vendor-lookup/` | MAC OUI vendor lookup |
 | `/help/` `/about/` `/privacy/` `/terms/` | Info pages |
@@ -63,6 +64,10 @@ By region:
 - **Philippines** — hand-curated real streets + barangay + 4-digit ZIPs (Metro Manila, Cebu, Davao,
   Iloilo, Bacolod, Baguio, CDO, Zamboanga, GenSan, Angeles, Lipa). Every record is cross-checked
   against Nominatim + Zippopotam at build time; fixes go back into `scripts/generate-data.mjs`.
+- **Turkey** — hand-curated real streets + district + 5-digit postal codes (İstanbul, Ankara, İzmir,
+  Bursa, Antalya, Adana, Gaziantep, Konya, Trabzon, Kayseri, Eskişehir, Mersin, Samsun).
+  Every record is cross-checked against Nominatim + Zippopotam at build time
+  (`scripts/validate-tr.mjs`); house numbers use Turkish `No: N` style.
 - **HK / UK / DE / SG / JP / CA / IN / TW** — hand-curated real area/street samples in
   `scripts/generate-data.mjs` (not scraped live).
 - **Names, phone numbers, DOB, occupations, card numbers** are synthetic test values everywhere.

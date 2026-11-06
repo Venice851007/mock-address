@@ -655,6 +655,250 @@ write("ph", {
   mobilePrefixes: ["905","906","908","909","910","912","915","916","917","918","919","920","921","926","927","928","929","930","935","939","940","945","946","948","949","955","956","961","962","963","965","966","967"],
 });
 
+// --- TR ---
+// Curated real-street samples: street names + 5-digit postal codes that exist on maps
+// (cross-checked against Zippopotam + Nominatim, 2026-11-06).
+// House numbers synthesized at build time ("No: N" — Turkish style); names/phones synthetic.
+const TR_PLACES = [
+  { province: "İstanbul", plate: "34", cities: [
+    { city: "Beyoğlu", spots: [
+      { street: "İstiklal Caddesi", zip: "34433" },
+      { street: "Meşrutiyet Caddesi", zip: "34430" },
+      { street: "Sıraselviler Caddesi", zip: "34433" },
+      { street: "Tarlabaşı Bulvarı", zip: "34435" },
+    ]},
+    { city: "Beşiktaş", spots: [
+      { street: "Barbaros Bulvarı", zip: "34349" },
+      { street: "Ihlamurdere Caddesi", zip: "34357" },
+      { street: "Nispetiye Caddesi", zip: "34337" },
+      { street: "Levent Caddesi", zip: "34330" },
+    ]},
+    { city: "Şişli", spots: [
+      { street: "Abdi İpekçi Caddesi", zip: "34367" },
+      { street: "Halaskargazi Caddesi", zip: "34371" },
+      { street: "Büyükdere Caddesi", zip: "34394" },
+      { street: "Rumeli Caddesi", zip: "34371" },
+    ]},
+    { city: "Kadıköy", spots: [
+      { street: "Bağdat Caddesi", zip: "34728" },
+      { street: "Moda Caddesi", zip: "34710" },
+      { street: "Bahariye Caddesi", zip: "34714" },
+      { street: "Rıhtım Caddesi", zip: "34714" },
+    ]},
+    { city: "Üsküdar", spots: [
+      { street: "Hakimiyeti Milliye Caddesi", zip: "34672" },
+      { street: "Nuh Kuyusu Caddesi", zip: "34664" },
+      { street: "Bulgurlu Caddesi", zip: "34696" },
+    ]},
+    { city: "Fatih", spots: [
+      { street: "Divan Yolu Caddesi", zip: "34110" },
+      { street: "Vatan Caddesi", zip: "34093" },
+      { street: "Millet Caddesi", zip: "34096" },
+      { street: "Fevzipaşa Caddesi", zip: "34087" },
+    ]},
+  ]},
+  { province: "Ankara", plate: "06", cities: [
+    { city: "Çankaya", spots: [
+      { street: "Atatürk Bulvarı", zip: "06680" },
+      { street: "Tunalı Hilmi Caddesi", zip: "06680" },
+      { street: "Cinnah Caddesi", zip: "06690" },
+      { street: "Arjantin Caddesi", zip: "06680" },
+    ]},
+    { city: "Altındağ", spots: [
+      { street: "Anafartalar Caddesi", zip: "06050" },
+      { street: "Çankırı Caddesi", zip: "06050" },
+      { street: "Talatpaşa Bulvarı", zip: "06050" },
+    ]},
+    { city: "Yenimahalle", spots: [
+      { street: "Ragıp Tüzün Caddesi", zip: "06170" },
+      { street: "İvedik Caddesi", zip: "06378" },
+      { street: "Anadolu Bulvarı", zip: "06378" },
+    ]},
+    { city: "Mamak", spots: [
+      { street: "Tıp Fakültesi Caddesi", zip: "06620" },
+      { street: "Natoyolu Caddesi", zip: "06260" },
+    ]},
+  ]},
+  { province: "İzmir", plate: "35", cities: [
+    { city: "Konak", spots: [
+      { street: "Kıbrıs Şehitleri Caddesi", zip: "35220" },
+      { street: "Atatürk Caddesi", zip: "35210" },
+      { street: "Fevzipaşa Bulvarı", zip: "35210" },
+      { street: "Gazi Bulvarı", zip: "35210" },
+    ]},
+    { city: "Bornova", spots: [
+      { street: "Mustafa Kemal Caddesi", zip: "35040" },
+      { street: "Ankara Caddesi", zip: "35100" },
+      { street: "Kazımdirik Caddesi", zip: "35040" },
+    ]},
+    { city: "Karşıyaka", spots: [
+      { street: "Cemal Gürsel Caddesi", zip: "35580" },
+      { street: "Girne Bulvarı", zip: "35580" },
+      { street: "Kemalpaşa Caddesi", zip: "35520" },
+    ]},
+    { city: "Buca", spots: [
+      { street: "Menderes Caddesi", zip: "35380" },
+      { street: "Doğuş Caddesi", zip: "35395" },
+      { street: "Uğur Mumcu Caddesi", zip: "35390" },
+    ]},
+  ]},
+  { province: "Bursa", plate: "16", cities: [
+    { city: "Osmangazi", spots: [
+      { street: "Cumhuriyet Caddesi", zip: "16010" },
+      { street: "Atatürk Caddesi", zip: "16010" },
+      { street: "Fevzi Çakmak Caddesi", zip: "16040" },
+      { street: "Altıparmak Caddesi", zip: "16020" },
+    ]},
+    { city: "Nilüfer", spots: [
+      { street: "Fatih Sultan Mehmet Bulvarı", zip: "16160" },
+      { street: "Nilüfer Hatun Caddesi", zip: "16140" },
+      { street: "Pınar Caddesi", zip: "16022" },
+    ]},
+    { city: "Yıldırım", spots: [
+      { street: "Ankara Yolu Caddesi", zip: "16300" },
+      { street: "Yeşil Caddesi", zip: "16360" },
+    ]},
+  ]},
+  { province: "Antalya", plate: "07", cities: [
+    { city: "Muratpaşa", spots: [
+      { street: "Işıklar Caddesi", zip: "07100" },
+      { street: "Atatürk Caddesi", zip: "07030" },
+      { street: "Cumhuriyet Caddesi", zip: "07040" },
+    ]},
+    { city: "Kepez", spots: [
+      { street: "Sakarya Bulvarı", zip: "07025" },
+      { street: "Gazi Bulvarı", zip: "07090" },
+      { street: "Teomanpaşa Caddesi", zip: "07090" },
+    ]},
+    { city: "Konyaaltı", spots: [
+      { street: "Atatürk Bulvarı", zip: "07070" },
+      { street: "Akdeniz Bulvarı", zip: "07070" },
+      { street: "Gazi Mustafa Kemal Bulvarı", zip: "07075" },
+    ]},
+  ]},
+  { province: "Adana", plate: "01", cities: [
+    { city: "Seyhan", spots: [
+      { street: "Ziyapaşa Bulvarı", zip: "01130" },
+      { street: "Atatürk Caddesi", zip: "01120" },
+      { street: "İnönü Caddesi", zip: "01010" },
+      { street: "Gazipaşa Bulvarı", zip: "01120" },
+    ]},
+    { city: "Yüreğir", spots: [
+      { street: "Kozan Caddesi", zip: "01240" },
+      { street: "Mustafa Kemal Paşa Bulvarı", zip: "01230" },
+    ]},
+    { city: "Çukurova", spots: [
+      { street: "Turgut Özal Bulvarı", zip: "01360" },
+      { street: "Süleyman Demirel Bulvarı", zip: "01360" },
+    ]},
+  ]},
+  { province: "Gaziantep", plate: "27", cities: [
+    { city: "Şahinbey", spots: [
+      { street: "Gaziler Caddesi", zip: "27220" },
+      { street: "Atatürk Bulvarı", zip: "27220" },
+      { street: "İstasyon Caddesi", zip: "27400" },
+    ]},
+    { city: "Şehitkamil", spots: [
+      { street: "İncilipınar Caddesi", zip: "27090" },
+      { street: "Mütercim Asım Caddesi", zip: "27090" },
+    ]},
+  ]},
+  { province: "Konya", plate: "42", cities: [
+    { city: "Selçuklu", spots: [
+      { street: "Ahmet Hilmi Nalçacı Caddesi", zip: "42060" },
+      { street: "Atatürk Caddesi", zip: "42040" },
+    ]},
+    { city: "Meram", spots: [
+      { street: "Alaaddin Bulvarı", zip: "42040" },
+      { street: "Yeni Meram Caddesi", zip: "42090" },
+    ]},
+    { city: "Karatay", spots: [
+      { street: "Mevlana Caddesi", zip: "42040" },
+      { street: "Aslanlı Kışla Caddesi", zip: "42030" },
+    ]},
+  ]},
+  { province: "Trabzon", plate: "61", cities: [
+    { city: "Ortahisar", spots: [
+      { street: "Kahramanmaraş Caddesi", zip: "61060" },
+      { street: "Uzun Sokak", zip: "61050" },
+      { street: "Gazipaşa Caddesi", zip: "61050" },
+    ]},
+  ]},
+  { province: "Kayseri", plate: "38", cities: [
+    { city: "Melikgazi", spots: [
+      { street: "Cumhuriyet Caddesi", zip: "38010" },
+      { street: "Sivas Caddesi", zip: "38010" },
+      { street: "Atatürk Bulvarı", zip: "38010" },
+    ]},
+    { city: "Kocasinan", spots: [
+      { street: "Sivas Bulvarı", zip: "38020" },
+      { street: "Kocasinan Bulvarı", zip: "38030" },
+    ]},
+  ]},
+  { province: "Eskişehir", plate: "26", cities: [
+    { city: "Odunpazarı", spots: [
+      { street: "İsmet İnönü Caddesi", zip: "26010" },
+      { street: "Atatürk Bulvarı", zip: "26020" },
+      { street: "İki Eylül Caddesi", zip: "26010" },
+    ]},
+    { city: "Tepebaşı", spots: [
+      { street: "Hoşnudiye Caddesi", zip: "26030" },
+      { street: "Kızılcıklı Mahmut Pehlivan Caddesi", zip: "26130" },
+      { street: "Sıhhiye Caddesi", zip: "26030" },
+    ]},
+  ]},
+  { province: "Mersin", plate: "33", cities: [
+    { city: "Akdeniz", spots: [
+      { street: "Atatürk Caddesi", zip: "33070" },
+      { street: "İstiklal Caddesi", zip: "33050" },
+      { street: "Silifke Caddesi", zip: "33050" },
+    ]},
+    { city: "Yenişehir", spots: [
+      { street: "Gazi Mustafa Kemal Bulvarı", zip: "33155" },
+      { street: "Adnan Menderes Bulvarı", zip: "33140" },
+    ]},
+    { city: "Mezitli", spots: [
+      { street: "Gazi Mustafa Kemal Bulvarı", zip: "33340" },
+      { street: "Ziya Gökalp Caddesi", zip: "33340" },
+    ]},
+  ]},
+  { province: "Samsun", plate: "55", cities: [
+    { city: "İlkadım", spots: [
+      { street: "Atatürk Bulvarı", zip: "55030" },
+      { street: "İstiklal Caddesi", zip: "55070" },
+      { street: "Gazi Caddesi", zip: "55030" },
+    ]},
+    { city: "Atakum", spots: [
+      { street: "Adnan Menderes Bulvarı", zip: "55210" },
+      { street: "Atatürk Bulvarı", zip: "55090" },
+      { street: "İsmet İnönü Bulvarı", zip: "55210" },
+    ]},
+  ]},
+];
+const trAddrs = [];
+for (const prov of TR_PLACES) {
+  for (const c of prov.cities) {
+    for (const s of c.spots) {
+      for (let i = 0; i < 2; i++) {
+        const num = 1 + (trAddrs.length * 37 + i * 53) % 180;
+        trAddrs.push({
+          street: `${s.street} No: ${num}`,
+          city: c.city,
+          plate: prov.plate,
+          province: prov.province,
+          zip: s.zip,
+        });
+      }
+    }
+  }
+}
+write("tr", {
+  addresses: trAddrs,
+  firstNames: ["Mehmet", "Mustafa", "Ahmet", "Emre", "Can", "Deniz", "Kerem", "Mert", "Burak", "Onur", "Serkan", "Tolga", "Volkan", "Hakan", "Murat", "Kemal", "Ali", "Osman", "Yusuf", "Hasan", "Ayşe", "Fatma", "Zeynep", "Elif", "Merve", "Selin", "Ece", "İrem", "Gamze", "Sevgi", "Emine", "Hatice", "Esra", "Derya", "Gül", "Seda", "Pınar"],
+  lastNames: ["Yılmaz", "Kaya", "Demir", "Şahin", "Çelik", "Yıldız", "Yıldırım", "Öztürk", "Aydın", "Özdemir", "Arslan", "Doğan", "Kılıç", "Aslan", "Çetin", "Kara", "Koç", "Kurt", "Özkan", "Erdoğan", "Aksoy", "Güneş", "Kaplan", "Avcı", "Taş", "Yalçın", "Polat", "Ateş", "Ünal"],
+  mobilePrefixes: ["530", "531", "532", "533", "534", "535", "536", "537", "538", "539", "540", "541", "542", "543", "544", "545", "546", "547", "548", "549", "550", "551", "552", "553", "554", "555"],
+});
+
 // --- MAC OUI (common vendors, curated sample) ---
 const OUI = [
   ["000C29","VMware, Inc."],["005056","VMware, Inc."],["001C14","VMware, Inc."],

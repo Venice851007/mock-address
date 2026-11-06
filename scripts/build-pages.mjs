@@ -21,6 +21,7 @@ const NAV = [
   { path: "/in-address/", id: "in", zh: "印度地址", en: "IN Address", shortZh: "印", shortEn: "IN" },
   { path: "/tw-address/", id: "tw", zh: "台湾地址", en: "TW Address", shortZh: "台", shortEn: "TW" },
   { path: "/ph-address/", id: "ph", zh: "菲律宾地址", en: "PH Address", shortZh: "菲", shortEn: "PH" },
+  { path: "/tr-address/", id: "tr", zh: "土耳其地址", en: "TR Address", shortZh: "土", shortEn: "TR" },
   { path: "/mac-address/", id: "mac", zh: "MAC生成", en: "MAC Gen", shortZh: "MAC生成", shortEn: "MAC Gen" },
   { path: "/mac-address/vendor-lookup/", id: "mac-vendor", zh: "MAC厂商查询", en: "MAC Vendor", shortZh: "MAC查询", shortEn: "MAC Lookup" },
 ];
@@ -63,6 +64,7 @@ function shell({ page, path: pagePath, titleZh, titleEn, descZh, descEn, h1Zh, h
           <li><a href="https://air.minispacex.com" target="_blank" rel="noopener">苍穹打击者</a></li>
           <li><a href="https://brick.minispacex.com" target="_blank" rel="noopener">方块轮回</a></li>
           <li><a href="https://dola.minispacex.com/" target="_blank" rel="noopener">DoLa</a></li>
+          <li><a href="https://ip.minispacex.com" target="_blank" rel="noopener">IP 查询工具</a></li>
           <li><span class="is-current" aria-current="page">美区地址 · 当前</span></li>
           <li><a href="https://ip.minispacex.com" target="_blank" rel="noopener">IP 查询工具</a></li>
         </ul>
@@ -528,6 +530,33 @@ pages.push({
       { q: "覆盖哪些城市？", a: "大马尼拉（马卡蒂、帕赛、帕西格、塔吉格、曼达卢永、奎松、马尼拉、帕拉纳克、卡洛奥坎、圣胡安、拉斯皮尼亚斯）以及宿务、达沃、怡朗、巴科洛德、碧瑶、卡加延德奥罗、三宝颜、将军市、安吉利斯、利帕等城市样例。" },
       { q: "街道是真实存在的吗？", a: "是。样例采用真实存在的街道名与对应邮编（如 Ayala Avenue 1226、Osmeña Boulevard 6000），思路类似本站美国页用 Census TIGER 真实街道的做法，方便你在地图上验证；门牌号随机，整条记录仍标注为测试样例，不是真实居民信息。" },
       { q: "电话格式？", a: "样例使用菲律宾手机号形态 +63 9XX XXX XXXX，便于校验国际区号与号码长度。" },
+      { q: "可以当真实收件地址吗？", a: "不可以。仅限开发测试与表单校验，请使用合法真实资料办理正式业务。" },
+    ]),
+  },
+});
+
+pages.push({
+  out: "tr-address/index.html",
+  cfg: {
+    page: "tr",
+    path: "/tr-address/",
+    titleZh: "土耳其地址生成器｜伊斯坦布尔 安卡拉 伊兹密尔 5位邮编样例｜MiniSpaceX",
+    titleEn: "Turkey Address Generator | Istanbul Ankara Izmir Samples | MiniSpaceX",
+    descZh: "生成土耳其样例地址：伊斯坦布尔、安卡拉、伊兹密尔等城市街道、区、5 位邮编与 +90 电话。客户端本地生成，仅供开发测试。",
+    descEn: "Turkish sample addresses: Istanbul, Ankara, Izmir streets, districts, 5-digit postal codes, +90 phones. Client-side. Testing only.",
+    h1Zh: "土耳其地址在线生成器",
+    h1En: "Turkey Address Generator",
+    leadZh: "面向土耳其表单的地址字段样例：街道、区（ilçe）、省、5 位邮编与 +90 手机号。街道与邮编采用真实存在的公开样例（地图可查），门牌号随机，整条记录仍标注为测试样例。",
+    leadEn: "Sample TR address fields: street, district (ilçe), province, 5-digit postal code, +90 mobile. Streets and postal codes are real public samples (findable on maps); house numbers randomized; whole record labeled as test sample.",
+    crumbs: [{ href: "/", zh: "首页" }, { href: "/tr-address/", zh: "土耳其地址" }],
+    dataKeys: ["tr"],
+    controlsHtml: simpleControls(),
+    faqHtml: faq("常见问题 · 土耳其地址", [
+      { q: "土耳其邮编是几位？", a: "通常为 5 位数字（如伊斯坦布尔贝伊奥卢 34433、安卡拉昌卡亚 06700、伊兹密尔科纳克 35220）。本页样例遵循该规则，并与城市一一匹配。" },
+      { q: "地址顺序？", a: "土耳其习惯由小到大：街道门牌 → 区（ilçe） → 省 → 邮编。生成结果按「街道 No: 门牌，区，省 邮编」拼接，便于测试多段地址输入框。" },
+      { q: "覆盖哪些城市？", a: "伊斯坦布尔（贝伊奥卢、贝西克塔斯、希什利、卡德柯伊、于斯屈达尔、法提赫）、安卡拉、伊兹密尔、布尔萨、安塔利亚、阿达纳、加济安泰普、科尼亚、特拉布宗、开塞利、埃斯基谢希尔、梅尔辛、萨姆松等城市样例。" },
+      { q: "街道是真实存在的吗？", a: "是。样例采用真实存在的街道名与对应邮编（如 İstiklal Caddesi 34433、Bağdat Caddesi 34710），思路类似本站美国页用 Census TIGER 真实街道的做法，方便你在地图上验证；门牌号随机，整条记录仍标注为测试样例，不是真实居民信息。" },
+      { q: "电话格式？", a: "样例使用土耳其手机号形态 +90 5XX XXX XX XX，便于校验国际区号与号码长度。" },
       { q: "可以当真实收件地址吗？", a: "不可以。仅限开发测试与表单校验，请使用合法真实资料办理正式业务。" },
     ]),
   },

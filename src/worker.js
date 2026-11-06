@@ -12,6 +12,8 @@ const REDIRECT_MAP = {
   "/ca-address": "/ca-address/",
   "/in-address": "/in-address/",
   "/tw-address": "/tw-address/",
+  "/ph-address": "/ph-address/",
+  "/tr-address": "/tr-address/",
   "/mac-address": "/mac-address/",
   "/mac-address/vendor-lookup": "/mac-address/vendor-lookup/",
   "/help": "/help/",

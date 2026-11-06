@@ -8,7 +8,7 @@ const APP = readFileSync("public/js/app.js", "utf8");
 const DATA_FILES = {
   taxfree: ["common", "us-taxfree"], usa: ["common", "us"],
   hk: ["hk"], uk: ["uk"], de: ["de"], sg: ["sg"], jp: ["jp"],
-  ca: ["ca"], in: ["in"], tw: ["tw"], ph: ["ph"],
+  ca: ["ca"], in: ["in"], tw: ["tw"], ph: ["ph"], tr: ["tr"],
 };
 
 function makeCtx(page) {
