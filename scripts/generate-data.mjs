@@ -682,7 +682,7 @@ const TR_PLACES = [
     { city: "Kadıköy", spots: [
       { street: "Bağdat Caddesi", zip: "34728" },
       { street: "Moda Caddesi", zip: "34710" },
-      { street: "Bahariye Caddesi", zip: "34714" },
+      { street: "Bahariye Caddesi", zip: "34710" },
       { street: "Rıhtım Caddesi", zip: "34714" },
     ]},
     { city: "Üsküdar", spots: [
